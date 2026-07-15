@@ -1,0 +1,41 @@
+---
+import { Icon } from "@/components/Icon";
+
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<div class="faq-item rounded-2xl border border-white/20">
+  <button
+    type="button"
+    class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-4 text-left text-white"
+    aria-expanded="false"
+  >
+    {question}
+    <Icon name="chevron-down" className="faq-chevron shrink-0 transition-transform duration-300" />
+  </button>
+
+  <div class="faq-panel grid transition-[grid-template-rows] duration-300 ease-in-out">
+    <div class="overflow-hidden">
+      <p class="px-6 pb-4 text-white/70">{answer}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .faq-panel {
+    grid-template-rows: 0fr;
+  }
+
+  .faq-item.is-open .faq-panel {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-item.is-open .faq-chevron {
+    transform: rotate(180deg);
+  }
+</style>

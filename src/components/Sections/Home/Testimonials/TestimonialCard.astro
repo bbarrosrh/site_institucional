@@ -1,0 +1,41 @@
+---
+import { Icon } from "@/components/Icon";
+
+interface Props {
+  name: string;
+  role: string;
+  quote: string;
+}
+
+const { name, role, quote } = Astro.props;
+const width = Math.min(80, Math.max(36, Math.round(quote.length / 4)));
+
+const initials = name
+  .split(" ")
+  .map((part) => part[0])
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
+---
+
+<div
+  class="testimonial-card flex h-full min-w-64 w-full shrink-0 flex-col gap-6 rounded-2xl border border-white/10 p-6 lg:w-(--card-w)"
+  style={`--card-w: ${width}ch;`}
+>
+  <div class="flex items-center gap-3">
+    <span
+      class="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/10 font-heading font-semibold text-white"
+    >
+      {initials}
+    </span>
+    <div>
+      <p class="font-medium text-white">{name}</p>
+      <p class="text-sm text-white/60">{role}</p>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-2">
+    <Icon name="quote" className="size-8 shrink-0" />
+    <p class="text-[15px] text-white/85">{quote}</p>
+  </div>
+</div>

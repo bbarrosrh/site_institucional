@@ -1,0 +1,15 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { CardCarousel, type CardCarouselSlide } from "./CardCarousel";
+
+interface Props {
+  title: string;
+  slides: CardCarouselSlide[];
+}
+
+const { title, slides } = Astro.props;
+---
+
+<Section>
+  <CardCarousel client:load title={title} slides={slides} />
+</Section>

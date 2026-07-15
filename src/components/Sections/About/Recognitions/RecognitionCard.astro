@@ -1,0 +1,39 @@
+---
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import { cn } from "@/utils/className";
+
+interface Props {
+  logo: ImageMetadata;
+  logoBordered?: boolean;
+  name: string;
+  year: string;
+  description: string;
+  href: string;
+}
+
+const { logo, logoBordered, name, year, description, href } = Astro.props;
+---
+
+<div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-6 rounded-2xl bg-black p-6 sm:p-8">
+    <div class="flex items-center gap-4">
+      <img
+        src={logo.src}
+        alt={name}
+        class={cn("h-12 w-12 rounded-full object-cover", logoBordered && "border border-white/70")}
+      />
+      <div class="flex flex-col">
+        <h3 class="font-heading text-xl font-semibold text-white">{name}</h3>
+        <p class="text-white/60">{year}</p>
+      </div>
+    </div>
+
+    <p class="leading-relaxed text-white/85" set:html={description} />
+  </div>
+
+  <Button href={href} variant="primary" size="lg" className="w-full">
+    Veja a notícia
+    <Icon name="external-link" />
+  </Button>
+</div>

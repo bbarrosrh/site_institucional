@@ -1,0 +1,27 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { programs } from "@/data/About/programs";
+import ProgramCard from "./ProgramCard.astro";
+---
+
+<Section secondary>
+  <h2 class="section-title">Nossos programas exclusivos</h2>
+  <p class="section-subtitle">
+    Diferente de programas de mentoria genéricos, a B.Barros foi construída em torno de metas
+    claras, atendimento direto e resultado em tempo real de mercado. Assim, nasceram as seguintes
+    metodologias:
+  </p>
+
+  <div class="grid w-full gap-6 lg:grid-cols-2">
+    {
+      programs.map((program) => (
+        <ProgramCard
+          name={program.name}
+          title={program.title}
+          description={program.description}
+          href={program.href}
+        />
+      ))
+    }
+  </div>
+</Section>

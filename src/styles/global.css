@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "./utilities.css";
+@import "./scrollbar.css";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Lora", ui-serif, serif;
+  --font-caveat: "Caveat", cursive;
+
+  --color-primary: #e2cb9c;
+  --color-primary-emphasis: #b5a27d;
+  --color-secondary: #a1162d;
+  --color-secondary-emphasis: #811224;
+  --color-tertiary: #1c1c1f;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --color-tertiary: #0a0a0b;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-heading);
+}

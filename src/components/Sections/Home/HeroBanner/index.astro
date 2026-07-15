@@ -1,0 +1,49 @@
+---
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import { BannerDecoration } from "./BannerDecoration";
+import bannerDecorationMobile from "@/assets/images/Home/banner_decoration_mobile.svg";
+---
+
+<section class="relative flex min-h-dvh items-center overflow-hidden bg-black text-white">
+  <div class="bg-grid absolute inset-0 pointer-events-none"></div>
+
+  <div class="section-container w-full relative grid xl:grid-cols-2">
+    <div class="flex flex-col items-center text-center gap-6 sm:gap-10 xl:items-start xl:text-left">
+      <img src={bannerDecorationMobile.src} alt="" class="xl:hidden w-3/5 max-w-md" />
+      <h1 class="text-3xl sm:text-5xl xl:text-7xl leading-tight text-primary font-semibold">
+        Transformando potências em líderes
+      </h1>
+      <p
+        class="text-base sm:text-lg lg:text-xl leading-relaxed text-white w-full sm:w-4/5 lg:w-4/5"
+      >
+        Mentoria humanizada para profissionais que querem clareza, direção e posicionamento para
+        conquistarem o emprego dos sonhos, através de uma metodologia exclusiva.
+      </p>
+
+      <div>
+        <Button variant="secondary" size="lg" className="lg:px-12">
+          Agende uma conversa
+          <Icon name="arrow-right" className="size-5" />
+        </Button>
+      </div>
+
+      <div
+        class="flex flex-col items-center gap-4 xl:flex-row xl:pl-4 xl:border-l-8 xl:border-secondary"
+      >
+        <div class="flex -space-x-3">
+          {
+            Array.from({ length: 4 }).map(() => (
+              <span class="size-10 rounded-full bg-white ring-3 ring-black" />
+            ))
+          }
+        </div>
+        <p class="text-white/85 lg:w-1/2">+ de 300 clientes conquistaram a vaga dos sonhos</p>
+      </div>
+    </div>
+
+    <div class="relative hidden xl:flex items-center justify-end h-full">
+      <BannerDecoration client:load className="w-175 max-w-none" />
+    </div>
+  </div>
+</section>

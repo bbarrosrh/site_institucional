@@ -1,0 +1,25 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import Banner from "@/components/Layout/Banner.astro";
+import Introduction from "@/components/Sections/About/Introduction.astro";
+import Mission from "@/components/Sections/About/Mission.astro";
+import Programs from "@/components/Sections/About/Programs/index.astro";
+import Recognitions from "@/components/Sections/About/Recognitions/index.astro";
+import Mentors from "@/components/Sections/About/Mentors.astro";
+import Team from "@/components/Sections/About/Team.astro";
+import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
+---
+
+<Root title="Sobre Nós">
+  <Banner eyebrow="Sobre Nós" title="Conheça a nossa história" />
+  <Introduction />
+  <Mission />
+  <Programs />
+  <Mentors />
+  <Recognitions />
+  <Team />
+  <CallToAction
+    title="Pronto para dar o próximo passo?"
+    subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."
+  />
+</Root>

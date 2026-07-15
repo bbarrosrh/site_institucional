@@ -1,0 +1,24 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { recognitions } from "@/data/About/recognitions";
+import RecognitionCard from "./RecognitionCard.astro";
+---
+
+<Section secondary>
+  <h2 class="section-title">Reconhecimentos conquistados</h2>
+
+  <div class="grid w-full gap-6 lg:grid-cols-2">
+    {
+      recognitions.map((recognition) => (
+        <RecognitionCard
+          logo={recognition.logo}
+          logoBordered={recognition.logoBordered}
+          name={recognition.name}
+          year={recognition.year}
+          description={recognition.description}
+          href={recognition.href}
+        />
+      ))
+    }
+  </div>
+</Section>

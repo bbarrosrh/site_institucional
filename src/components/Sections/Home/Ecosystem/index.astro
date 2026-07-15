@@ -1,0 +1,30 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import EcosystemCard from "./EcosystemCard.astro";
+import InstituteCard from "./InstituteCard.astro";
+import { ecosystemItems } from "@/data/Home/ecosystem";
+---
+
+<Section>
+  <div>
+    <p class="section-eyebrow">O que oferecemos</p>
+    <h2 class="section-title">Nosso ecossistema vertical</h2>
+  </div>
+
+  <div class="grid w-full gap-12 lg:grid-cols-3">
+    {
+      ecosystemItems.map((item) => (
+        <EcosystemCard
+          icon={item.icon}
+          subtitle={item.subtitle}
+          title={item.title}
+          description={item.description}
+          buttonLabel={item.buttonLabel}
+          href={item.href}
+        />
+      ))
+    }
+  </div>
+
+  <InstituteCard />
+</Section>

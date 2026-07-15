@@ -1,0 +1,74 @@
+---
+import { cn } from "@/utils/className";
+import logo from "@/assets/images/About/logo.svg";
+
+const avatarsPerSide = 25;
+const avatarVisibility = (i: number) => (i < 20 ? "" : "hidden xl:block");
+---
+
+<section class="section-wrapper">
+  <div class="section-container flex flex-col items-center gap-8 lg:gap-12">
+    <h2 class="section-title">Nós mudamos vidas para sempre</h2>
+    <p class="section-subtitle">
+      A B.Barros é resultado de uma equipe que acredita que desenvolver pessoas é desenvolver
+      organizações. É essa convicção, e não só a metodologia, que sustenta cada história de
+      transformação.
+    </p>
+  </div>
+
+  <div class="relative mt-8 overflow-hidden lg:mt-12 xl:section-container">
+    <div
+      class="flex flex-col items-center justify-center gap-8 sm:gap-12 lg:flex-row lg:gap-20 xl:gap-28"
+    >
+      <div class="grid w-max shrink-0 grid-cols-10 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4 xl:gap-6">
+        {
+          Array.from({ length: avatarsPerSide }).map((_, i) => (
+            <div
+              class={cn(
+                "size-8 shrink-0 rounded-full bg-white sm:size-10 lg:size-14 xl:size-20",
+                avatarVisibility(i)
+              )}
+            />
+          ))
+        }
+      </div>
+
+      <img
+        src={logo.src}
+        alt="Símbolo da B.Barros"
+        class="size-14 shrink-0 sm:size-20 lg:size-36 xl:size-90"
+      />
+
+      <div class="grid w-max shrink-0 grid-cols-10 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4 xl:gap-6">
+        {
+          Array.from({ length: avatarsPerSide }).map((_, i) => (
+            <div
+              class={cn(
+                "size-8 shrink-0 rounded-full bg-white sm:size-10 lg:size-14 xl:size-20",
+                avatarVisibility(i)
+              )}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-linear-to-r from-black via-black/70 to-transparent lg:block lg:w-48 xl:w-96"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 hidden w-32 bg-linear-to-l from-black via-black/70 to-transparent lg:block lg:w-48 xl:w-96"
+    >
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black via-black/70 to-transparent sm:h-24 lg:hidden"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-black via-black/70 to-transparent sm:h-24 lg:hidden"
+    >
+    </div>
+  </div>
+</section>

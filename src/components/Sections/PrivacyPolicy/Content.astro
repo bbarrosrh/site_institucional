@@ -1,0 +1,33 @@
+---
+import { Content } from "@/data/PrivacyPolicy/content.md";
+---
+
+<section class="section-wrapper bg-black text-white">
+  <div class="section-container policy-content">
+    <Content />
+  </div>
+</section>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .policy-content {
+    @apply flex flex-col gap-4 lg:gap-6;
+  }
+
+  .policy-content :global(hr) {
+    @apply opacity-15 my-5;
+  }
+
+  .policy-content :global(h4) {
+    @apply text-xl lg:text-2xl font-semibold text-white -mb-2;
+  }
+
+  .policy-content :global(p) {
+    @apply leading-relaxed lg:text-lg text-white/85;
+  }
+
+  .policy-content :global(ul) {
+    @apply py-2 list-disc flex flex-col gap-1 pl-5 leading-relaxed text-white/85 lg:text-lg;
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import DuoSection from "@/components/Layout/Section/Duo.astro";
+import Accordion from "./Accordion.astro";
+import { accordionItems } from "@/data/Home/faq";
+import venus from "@/assets/images/Home/venus.png";
+---
+
+<DuoSection sectionClass="text-white" rightClass="lg:self-start" secondary>
+  <div slot="header" class="text-center">
+    <p class="section-eyebrow">FAQ</p>
+    <h2 class="section-title mb-4 lg:mb-12">Perguntas e Respostas</h2>
+  </div>
+
+  <div slot="left" class="faq-group flex flex-col gap-3">
+    {accordionItems.map((item) => <Accordion question={item.question} answer={item.answer} />)}
+  </div>
+
+  <img
+    id="faq-image"
+    slot="right"
+    src={venus.src}
+    alt=""
+    class="hidden w-full rounded-2xl object-cover object-top lg:block"
+  />
+</DuoSection>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".faq-group").forEach((group) => {
+    const items = group.querySelectorAll<HTMLElement>(".faq-item");
+    const image = document.getElementById("faq-image") as HTMLImageElement | null;
+
+    const syncImageHeight = () => {
+      if (!image) return;
+      const hasOpenItem = group.querySelector(".is-open");
+      if (hasOpenItem) return;
+      image.style.height = `${group.offsetHeight}px`;
+    };
+
+    items.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
+      trigger?.addEventListener("click", () => {
+        const isOpen = item.classList.contains("is-open");
+
+        items.forEach((other) => {
+          other.classList.remove("is-open");
+          other.querySelector(".faq-trigger")?.setAttribute("aria-expanded", "false");
+        });
+
+        if (!isOpen) {
+          item.classList.add("is-open");
+          trigger.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    document.fonts.ready.then(syncImageHeight);
+    window.addEventListener("resize", syncImageHeight);
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import { cn } from "@/utils/className";
+
+interface Props {
+  reverse?: boolean;
+  secondary?: boolean;
+  sectionClass?: string;
+  leftClass?: string;
+  rightClass?: string;
+}
+
+const { reverse = false, secondary = false, sectionClass, leftClass, rightClass } = Astro.props;
+---
+
+<section class={cn("section-wrapper", secondary && "bg-tertiary", sectionClass)}>
+  <div class="section-container flex flex-col gap-8">
+    <slot name="header" />
+
+    <div
+      class={cn(
+        "flex flex-col gap-6 sm:gap-8 lg:items-center lg:gap-32",
+        reverse ? "lg:flex-row-reverse" : "lg:flex-row"
+      )}
+    >
+      <div class={cn("w-full lg:w-1/2", leftClass)}>
+        <slot name="left" />
+      </div>
+      <div class={cn("w-full lg:w-1/2", rightClass)}>
+        <slot name="right" />
+      </div>
+    </div>
+  </div>
+</section>

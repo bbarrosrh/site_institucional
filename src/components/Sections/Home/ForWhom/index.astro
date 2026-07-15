@@ -1,0 +1,13 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { MomentsExplorer } from "./MomentsExplorer";
+---
+
+<Section secondary>
+  <div>
+    <p class="section-eyebrow">Para quem é a B.Barros</p>
+    <h2 class="section-title">Veja qual é o seu momento</h2>
+  </div>
+
+  <MomentsExplorer client:load />
+</Section>

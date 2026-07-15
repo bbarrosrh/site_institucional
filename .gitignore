@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# local cache
+.cache/
+
+# environment (keep .env.example, ignore real secrets)
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+
+# personal Claude Code settings
+.claude/settings.local.json

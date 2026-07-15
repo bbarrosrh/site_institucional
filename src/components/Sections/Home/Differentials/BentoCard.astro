@@ -1,0 +1,23 @@
+---
+import { cn } from "@/utils/className";
+
+interface Props {
+  title: string;
+  description?: string;
+  colSpan?: 1 | 2;
+}
+
+const { title, description, colSpan = 1 } = Astro.props;
+---
+
+<div
+  class={cn(
+    "flex lg:min-h-40 flex-col items-center justify-center gap-2 rounded-2xl bg-black p-8 text-center",
+    colSpan === 2 && "lg:col-span-2"
+  )}
+>
+  <h3 class="font-heading text-xl font-semibold text-white lg:text-3xl">
+    {title}
+  </h3>
+  {description && <p class="max-lg:text-sm text-white/75">{description}</p>}
+</div>

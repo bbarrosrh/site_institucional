@@ -1,0 +1,20 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import BentoCard from "./BentoCard.astro";
+import { differentials } from "@/data/Home/differentials";
+---
+
+<Section secondary>
+  <div>
+    <p class="section-eyebrow">Nossos diferenciais</p>
+    <h2 class="section-title">O que torna o nosso serviço tão eficaz</h2>
+  </div>
+
+  <div class="grid w-full gap-4 lg:grid-cols-3">
+    {
+      differentials.map((item) => (
+        <BentoCard title={item.title} description={item.description} colSpan={item.colSpan} />
+      ))
+    }
+  </div>
+</Section>

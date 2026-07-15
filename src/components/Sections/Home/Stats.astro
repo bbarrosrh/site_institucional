@@ -1,0 +1,103 @@
+---
+import { stats } from "@/data/Home/stats";
+
+const parsedStats = stats.map((stat) => {
+  const match = stat.value.match(/^(-?\d+(?:\.\d+)?)(.*)$/);
+  const numberPart = match ? match[1] : stat.value;
+  const trailing = match ? match[2] : "";
+  const decimals = numberPart.includes(".") ? numberPart.split(".")[1].length : 0;
+
+  return { ...stat, target: Number(numberPart), decimals, trailing };
+});
+---
+
+<section class="section-wrapper py-4 lg:py-12 text-white">
+  <div class="section-container">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-white/15 lg:divide-x">
+      {
+        parsedStats.map((stat, index) => (
+          <div
+            class={[
+              "font-heading flex flex-col items-center gap-2 px-12 py-6 text-center lg:py-0 border-white/15",
+              index === 1 && "border-t sm:border-t-0",
+              (index === 2 || index === 3) && "border-t lg:border-t-0",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <p class="text-4xl font-semibold text-primary lg:text-5xl">
+              <span
+                class="stat-number inline-flex"
+                data-target={stat.target}
+                data-decimals={stat.decimals}
+              >
+                <span class="inline-block w-[0.62em] text-center">0</span>
+              </span>
+              {stat.trailing}
+              {stat.suffix && <span class="ml-1 text-xl lg:text-2xl">{stat.suffix}</span>}
+            </p>
+            <div>
+              <p class="text-sm lg:text-xl">{stat.label}</p>
+              {stat.sublabel && <p class="text-xs text-white/50 lg:text-base">{stat.sublabel}</p>}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const DURATION = 1500;
+
+  const setDigits = (container: HTMLElement, text: string) => {
+    [...text].forEach((char, i) => {
+      let span = container.children[i] as HTMLElement | undefined;
+      if (!span) {
+        span = document.createElement("span");
+        container.appendChild(span);
+      }
+      span.className = /\d/.test(char) ? "inline-block w-[0.62em] text-center" : "inline-block";
+      span.textContent = char;
+    });
+
+    while (container.children.length > text.length) {
+      container.lastChild?.remove();
+    }
+  };
+
+  const animateNumber = (el: HTMLElement) => {
+    const target = Number(el.dataset.target);
+    const decimals = Number(el.dataset.decimals ?? "0");
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDigits(el, target.toFixed(decimals));
+      return;
+    }
+
+    const start = performance.now();
+
+    const tick = (time: number) => {
+      const progress = Math.min((time - start) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDigits(el, (target * eased).toFixed(decimals));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          animateNumber(entry.target as HTMLElement);
+          obs.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.4 }
+  );
+
+  document.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => observer.observe(el));
+</script>

@@ -1,0 +1,119 @@
+---
+import { footerColumns, socialLinks, contactInfo, legalInfo } from "@/data/footer";
+import { Icon } from "@/components/Icon";
+import LogoSpotlight from "./LogoSpotlight.astro";
+import logoWhite from "@/assets/images/logo_white.svg";
+import footerDecorationRaw from "@/assets/images/footer_decoration.svg?raw";
+---
+
+<footer class="bg-black text-white">
+  <div class="section-container py-12 lg:py-16 lg:pb-8">
+    <div class="flex flex-col gap-10 lg:flex-row lg:justify-between">
+      <div class="flex flex-col gap-10 lg:flex-row lg:gap-16">
+        <div class="max-w-xs">
+          <img src={logoWhite.src} alt="B.Barros" class="h-8 w-auto" />
+
+          <div class="mt-5 flex gap-3">
+            {
+              socialLinks.map((social) => (
+                <a
+                  href={social.href}
+                  aria-label={social.label}
+                  class="size-10 rounded-full bg-white flex items-center justify-center shrink-0 hover:opacity-90"
+                >
+                  <svg
+                    viewBox={social.viewBox}
+                    fill="black"
+                    class="size-5"
+                    set:html={social.path}
+                  />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 sm:flex sm:gap-16">
+          {
+            footerColumns.map((col) => (
+              <div class="flex flex-col gap-3">
+                <h3 class="font-semibold text-lg text-white/80">{col.heading}</h3>
+                <ul class="flex flex-col gap-2">
+                  {col.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="group inline-flex items-center gap-1 text-[15px] text-white hover:text-white/70"
+                      >
+                        {link.title}
+                        <span class="relative block size-4 overflow-hidden shrink-0">
+                          <Icon
+                            name="arrow-up-right"
+                            size={16}
+                            stroke={2}
+                            className="block -translate-x-full translate-y-full transition-transform duration-200 ease-out group-hover:translate-x-0 group-hover:translate-y-0"
+                          />
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 lg:items-end lg:text-right">
+        <h3 class="font-medium text-white tracking-wide">Contato</h3>
+        <a
+          href={contactInfo.email.href}
+          class="inline-flex items-center gap-2 text-[15px] text-white hover:text-white/70"
+        >
+          <Icon name="mail" size={18} className="shrink-0" />
+          {contactInfo.email.label}
+        </a>
+        <a
+          href={contactInfo.whatsapp.href}
+          class="inline-flex items-center gap-2 text-[15px] text-white hover:text-white/70"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" class="size-4.5 shrink-0">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+            ></path>
+            <path
+              d="M12.004 2c-5.523 0-10 4.477-10 10 0 1.762.464 3.416 1.276 4.852L2 22l5.304-1.393A9.947 9.947 0 0012.004 22c5.523 0 10-4.477 10-10s-4.477-10-10-10zm0 18.187a8.176 8.176 0 01-4.168-1.142l-.299-.177-3.15.827.84-3.073-.194-.316A8.185 8.185 0 013.814 12c0-4.518 3.669-8.187 8.19-8.187 4.518 0 8.187 3.669 8.187 8.187 0 4.518-3.669 8.187-8.187 8.187z"
+            ></path>
+          </svg>
+          {contactInfo.whatsapp.label}
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="mt-8 lg:mt-32 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-6"
+    >
+      <p class="text-sm text-white">
+        {legalInfo.company}
+        {" "}
+        <span id="footer-year"></span>
+      </p>
+
+      <a href={legalInfo.privacyPolicyHref} class="text-sm text-white hover:text-white/70">
+        Política de Privacidade
+      </a>
+    </div>
+
+    <LogoSpotlight
+      id="footer-decoration"
+      raw={footerDecorationRaw}
+      ariaLabel="Bruna BArros"
+      class="mt-12 lg:mt-16"
+    />
+  </div>
+</footer>
+
+<script>
+  const el = document.getElementById("footer-year");
+  if (el) el.textContent = new Date().getFullYear().toString();
+</script>

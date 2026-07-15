@@ -1,0 +1,33 @@
+---
+import { cn } from "@/utils/className";
+
+interface Props {
+  id?: string;
+  secondary?: boolean;
+  backgroundImage?: string;
+  noPbMobile?: boolean;
+}
+
+const { id, secondary, backgroundImage, noPbMobile } = Astro.props;
+---
+
+<section
+  id={id}
+  class={cn(
+    "section-wrapper",
+    noPbMobile && "max-sm:pb-0",
+    secondary && !backgroundImage && "bg-tertiary"
+  )}
+  style={backgroundImage
+    ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
+    : undefined}
+>
+  <div
+    class={cn(
+      "section-container flex flex-col items-center gap-8 lg:gap-12",
+      backgroundImage && "relative z-10"
+    )}
+  >
+    <slot />
+  </div>
+</section>

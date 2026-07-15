@@ -1,0 +1,63 @@
+:root {
+  --container-px: 1rem;
+  --grid-line-opacity: 0.1;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --container-px: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-px: 2rem;
+    --grid-line-opacity: 0.06;
+  }
+}
+
+@utility section-wrapper {
+  @apply relative w-full py-8 sm:py-16 lg:py-24;
+}
+
+@utility section-container {
+  @apply max-w-400 mx-auto px-(--container-px);
+}
+
+/* Section */
+@utility section-eyebrow {
+  @apply text-sm sm:text-lg mb-1 sm:mb-3 text-center text-white;
+}
+
+@utility section-title {
+  @apply text-2xl sm:text-3xl xl:text-5xl text-center font-semibold text-primary;
+}
+
+@utility section-subtitle {
+  @apply -mt-5 lg:text-lg xl:text-xl text-center text-white max-w-full lg:max-w-2/3 leading-relaxed;
+}
+
+/* Ignore section-container horizontal padding */
+@utility full-bleed {
+  margin-left: calc(-1 * var(--container-px));
+  margin-right: calc(-1 * var(--container-px));
+  width: calc(100% + 2 * var(--container-px));
+}
+
+/* Fully ignore section-container right padding */
+@utility bleed-right {
+  margin-right: calc(-1 * (var(--container-px) + max(0px, (100vw - 100rem) / 2)));
+}
+
+/* Left padding matching section-container's inset, for full-bleed layouts without section-container */
+@utility container-pl {
+  padding-left: max(var(--container-px), calc(var(--container-px) + (100vw - 100rem) / 2));
+}
+
+/* Checkered line grid used as a section background decoration */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, var(--grid-line-opacity)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, var(--grid-line-opacity)) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

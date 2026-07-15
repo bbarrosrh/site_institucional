@@ -1,0 +1,33 @@
+---
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import adao from "@/assets/images/adao.png";
+
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-black text-white">
+  <img src={adao.src} alt="" class="absolute inset-0 h-full w-full object-cover object-center" />
+  <div class="absolute inset-0 bg-linear-to-b from-black/30 via-black/80 to-black"></div>
+
+  <div
+    class="section-container relative flex flex-col items-center gap-6 py-12 text-center lg:flex-row lg:items-center lg:justify-between lg:py-32 lg:text-left"
+  >
+    <div class="flex flex-col gap-3 border-secondary lg:border-l-8 lg:pl-6">
+      <h2 class="font-heading text-2xl font-semibold text-primary sm:text-3xl xl:text-5xl">
+        {title}
+      </h2>
+      <p class="leading-relaxed text-white/85 lg:text-2xl">{subtitle}</p>
+    </div>
+
+    <Button href="#" variant="secondary" size="lg" className="shrink-0">
+      Agende uma conversa
+      <Icon name="arrow-right" />
+    </Button>
+  </div>
+</section>
