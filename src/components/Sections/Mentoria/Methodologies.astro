@@ -1,0 +1,41 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { methodologies } from "@/data/Mentoring/methodologies";
+---
+
+<Section>
+  <h2 class="section-title">Metodologias Ensinadas</h2>
+
+  <div class="grid w-full gap-6 lg:grid-cols-2">
+    {
+      methodologies.map((methodology) => (
+        <div class="flex flex-col overflow-hidden rounded-2xl bg-tertiary">
+          <div class="border-b border-white/10 p-6 lg:p-8">
+            <p class="bg-linear-to-b from-primary to-tertiary bg-clip-text font-heading text-6xl font-bold text-transparent sm:text-7xl">
+              {methodology.name}
+              <sup class="relative -ml-4 -top-1 align-super font-sans text-2xl font-extralight! text-primary sm:text-3xl">
+                ®
+              </sup>
+            </p>
+            <p class="mt-3 leading-relaxed text-white/85">{methodology.description}</p>
+          </div>
+
+          <div class="relative">
+            <div class="scrollbar-mini flex max-h-120 flex-col overflow-y-auto">
+              {methodology.steps.map((step, index) => (
+                <div class="border-b border-white/10 p-6 last:border-0 lg:p-8">
+                  <p class="font-heading text-2xl font-bold text-white">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 class="mt-2 font-semibold text-white">{step.title}</h3>
+                  <p class="mt-1 leading-relaxed text-white/70">{step.description}</p>
+                </div>
+              ))}
+            </div>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-tertiary to-transparent" />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Section>

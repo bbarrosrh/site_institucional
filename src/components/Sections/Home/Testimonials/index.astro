@@ -1,28 +1,72 @@
 ---
-import { Icon } from "@/components/Icon";
+import Section from "@/components/Layout/Section/index.astro";
+import { Button } from "@/components/Button";
+import { CarouselNavButton } from "@/components/CarouselNavButton";
 import TestimonialCard from "./TestimonialCard.astro";
 import { testimonials } from "@/data/Home/testimonials";
 
-const half = Math.ceil(testimonials.length / 2);
-const desktopRows = [testimonials.slice(0, half), testimonials.slice(half)];
+const COLUMN_COUNT = 3;
+const VISIBLE_ROWS = 2;
+const VISIBLE_COUNT = COLUMN_COUNT * VISIBLE_ROWS;
+
+const hasMore = testimonials.length > VISIBLE_COUNT;
 ---
 
-<section class="section-wrapper overflow-x-hidden bg-black text-white">
-  <div class="section-container flex flex-col gap-8">
-    {/* Mobile */}
-    <div class="testimonials-block flex flex-col gap-8 lg:hidden">
-      <div class="flex flex-col items-center gap-1 text-center">
-        <p class="section-eyebrow">Depoimentos de clientes</p>
-        <h2 class="section-title">Histórias reais de quem já virou a chave</h2>
+<Section>
+  <div class="flex flex-col items-center gap-1 text-center">
+    <p class="section-eyebrow">Depoimentos de clientes</p>
+    <h2 class="section-title">Histórias reais de quem já virou a chave</h2>
+  </div>
+
+  <div class="testimonials-block w-full flex flex-col gap-6 lg:hidden">
+    <div
+      class="testimonials-track flex gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        testimonials.map((testimonial) => (
+          <div class="w-full min-w-0 shrink-0 snap-start">
+            <TestimonialCard
+              name={testimonial.name}
+              role={testimonial.role}
+              quote={testimonial.quote}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center justify-between gap-6">
+      <CarouselNavButton
+        client:load
+        direction="prev"
+        label="Anterior"
+        className="testimonials-prev"
+      />
+
+      <div class="h-2 w-full overflow-hidden rounded-full bg-white/10">
+        <div
+          class="testimonials-progress h-full w-1/2 rounded-full bg-primary transition-[width] duration-300 ease-out"
+        >
+        </div>
       </div>
 
+      <CarouselNavButton
+        client:load
+        direction="next"
+        label="Próximo"
+        className="testimonials-next"
+      />
+    </div>
+  </div>
+
+  <div class="testimonials-block hidden w-full lg:flex lg:flex-col lg:gap-8">
+    <div class="relative w-full">
       <div
-        id="testimonials-track-mobile"
-        class="testimonials-track flex gap-4 overflow-x-auto scroll-smooth pb-2 scrollbar-none snap-x snap-mandatory [&::-webkit-scrollbar]:hidden"
+        class="testimonials-grid grid grid-cols-3 gap-6 transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       >
         {
           testimonials.map((testimonial) => (
-            <div class="w-full shrink-0 snap-start">
+            <div class="testimonial-item">
               <TestimonialCard
                 name={testimonial.name}
                 role={testimonial.role}
@@ -33,147 +77,164 @@ const desktopRows = [testimonials.slice(0, half), testimonials.slice(half)];
         }
       </div>
 
-      <div class="flex items-center justify-between gap-4">
-        <button
-          type="button"
-          class="testimonials-prev flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-primary text-black hover:bg-primary-emphasis disabled:cursor-auto disabled:opacity-40 disabled:hover:bg-primary"
-          aria-label="Depoimento anterior"
-        >
-          <Icon name="chevron-left" size={24} />
-        </button>
-
-        <div class="h-2 w-full overflow-hidden rounded-full bg-white/10">
-          <div class="testimonials-progress h-full w-1/2 rounded-full bg-primary"></div>
-        </div>
-
-        <button
-          type="button"
-          class="testimonials-next flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-primary text-black hover:bg-primary-emphasis disabled:cursor-auto disabled:opacity-40 disabled:hover:bg-primary"
-          aria-label="Próximo depoimento"
-        >
-          <Icon name="chevron-right" size={24} />
-        </button>
-      </div>
+      {
+        hasMore && (
+          <div class="testimonials-fade pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-linear-to-b from-transparent to-black" />
+        )
+      }
     </div>
 
-    {/* Desktop */}
-    <div class="testimonials-block hidden lg:flex lg:flex-col lg:gap-8">
-      <div class="flex items-end justify-between">
-        <div class="border-l-8 border-secondary pl-5">
-          <p class="section-eyebrow text-left">Depoimentos de clientes</p>
-          <h2 class="section-title text-left">Histórias reais de quem já virou a chave</h2>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <div class="h-2 w-24 overflow-hidden rounded-full bg-white/10">
-            <div class="testimonials-progress h-full w-1/2 rounded-full bg-primary"></div>
-          </div>
-
-          <div class="flex gap-4">
-            <button
-              type="button"
-              class="testimonials-prev flex size-12 cursor-pointer items-center justify-center rounded-full bg-primary text-black hover:bg-primary-emphasis disabled:cursor-auto disabled:opacity-40 disabled:hover:bg-primary"
-              aria-label="Depoimento anterior"
-            >
-              <Icon name="chevron-left" size={24} />
-            </button>
-            <button
-              type="button"
-              class="testimonials-next flex size-12 cursor-pointer items-center justify-center rounded-full bg-primary text-black hover:bg-primary-emphasis disabled:cursor-auto disabled:opacity-40 disabled:hover:bg-primary"
-              aria-label="Próximo depoimento"
-            >
-              <Icon name="chevron-right" size={24} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bleed-right relative">
-        <div
-          id="testimonials-track-desktop"
-          class="testimonials-track flex flex-col gap-4 overflow-x-auto scroll-smooth pb-2 scrollbar-none snap-x snap-mandatory [&::-webkit-scrollbar]:hidden"
+    {
+      hasMore && (
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className="testimonials-more self-center"
+          data-visible-count={VISIBLE_COUNT}
+          data-column-count={COLUMN_COUNT}
         >
-          {
-            desktopRows.map((row) => (
-              <div class="flex gap-4">
-                {row.map((testimonial) => (
-                  <div class="snap-start">
-                    <TestimonialCard
-                      name={testimonial.name}
-                      role={testimonial.role}
-                      quote={testimonial.quote}
-                    />
-                  </div>
-                ))}
-              </div>
-            ))
-          }
-        </div>
-
-        <div
-          class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent"
-        >
-        </div>
-      </div>
-    </div>
+          Ver mais
+        </Button>
+      )
+    }
   </div>
-</section>
+</Section>
 
 <script>
-  const setupCarousel = (track: HTMLElement, scope: ParentNode) => {
-    const progress = scope.querySelector<HTMLElement>(".testimonials-progress");
-    const prevButton = scope.querySelector<HTMLButtonElement>(".testimonials-prev");
-    const nextButton = scope.querySelector<HTMLButtonElement>(".testimonials-next");
-    if (!progress || !prevButton || !nextButton) return;
-
-    const scrollStep = () => {
-      const firstCard = track.querySelector<HTMLElement>(".testimonial-card");
-      const item = firstCard?.parentElement;
-      if (!item) return track.clientWidth * 0.8;
-      const GAP_PX = 16;
-      return item.getBoundingClientRect().width + GAP_PX;
-    };
-
-    const updateProgress = () => {
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      const ratio = maxScroll > 0 ? track.scrollLeft / maxScroll : 0;
-      progress.style.width = `${Math.max(10, ratio * 100)}%`;
-
-      const atStart = track.scrollLeft <= 1;
-      const atEnd = track.scrollLeft >= maxScroll - 1;
-      prevButton.disabled = atStart;
-      nextButton.disabled = atEnd;
-    };
-
-    prevButton.addEventListener("click", () => {
-      track.scrollBy({ left: -scrollStep(), behavior: "smooth" });
-    });
-
-    nextButton.addEventListener("click", () => {
-      track.scrollBy({ left: scrollStep(), behavior: "smooth" });
-    });
-
-    track.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-  };
-
-  const matchTallestCard = (track: HTMLElement) => {
-    const cards = track.querySelectorAll<HTMLElement>(".testimonial-card");
-    if (cards.length === 0) return;
-
-    cards.forEach((card) => {
-      card.style.height = "auto";
-    });
-    const tallest = Math.max(...Array.from(cards, (card) => card.offsetHeight));
-    cards.forEach((card) => {
-      card.style.height = `${tallest}px`;
-    });
-  };
-
   document.querySelectorAll<HTMLElement>(".testimonials-track").forEach((track) => {
     const scope = track.closest(".testimonials-block") ?? document;
-    matchTallestCard(track);
-    setupCarousel(track, scope);
-    window.addEventListener("resize", () => matchTallestCard(track));
+    const progressFill = scope.querySelector<HTMLElement>(".testimonials-progress");
+    const prevButton = scope.querySelector<HTMLButtonElement>(".testimonials-prev");
+    const nextButton = scope.querySelector<HTMLButtonElement>(".testimonials-next");
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (!prevButton || !nextButton || cards.length === 0) return;
+
+    const gapPx = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const cardStep = () => cards[0].getBoundingClientRect().width + gapPx();
+    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+
+    let stops = [0];
+
+    const computeStops = () => {
+      const max = maxScroll();
+      const step = cardStep();
+      const result = [0];
+
+      if (step > 0) {
+        let next = step;
+        while (next < max - 1 && result.length < cards.length) {
+          result.push(next);
+          next += step;
+        }
+      }
+
+      if (max > result[result.length - 1] + 1) result.push(max);
+      return result;
+    };
+
+    const syncStops = () => {
+      stops = computeStops();
+    };
+
+    const activeStopIndex = () => {
+      let closest = 0;
+      let closestDistance = Infinity;
+      stops.forEach((stop, index) => {
+        const distance = Math.abs(track.scrollLeft - stop);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = index;
+        }
+      });
+      return closest;
+    };
+
+    const goToStop = (index: number) => {
+      const clamped = Math.max(0, Math.min(index, stops.length - 1));
+      track.scrollTo({ left: stops[clamped], behavior: "smooth" });
+    };
+
+    const update = () => {
+      const index = activeStopIndex();
+
+      if (progressFill) {
+        const ratio = stops.length > 1 ? index / (stops.length - 1) : 1;
+        progressFill.style.width = `${Math.max(4, ratio * 100)}%`;
+      }
+
+      prevButton.disabled = index <= 0;
+      nextButton.disabled = index >= stops.length - 1;
+    };
+
+    prevButton.addEventListener("click", () => goToStop(activeStopIndex() - 1));
+    nextButton.addEventListener("click", () => goToStop(activeStopIndex() + 1));
+
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", () => {
+      syncStops();
+      update();
+    });
+
+    syncStops();
+    update();
+    setTimeout(() => {
+      syncStops();
+      update();
+    }, 50);
   });
+
+  const grid = document.querySelector<HTMLElement>(".testimonials-grid");
+  const fade = document.querySelector<HTMLElement>(".testimonials-fade");
+  const moreButton = document.querySelector<HTMLButtonElement>(".testimonials-more");
+
+  if (grid && moreButton) {
+    const items = Array.from(grid.children) as HTMLElement[];
+    const visibleCount = Number(moreButton.dataset.visibleCount) || items.length;
+    const columnCount = Number(moreButton.dataset.columnCount) || 1;
+    const initialRows = Math.ceil(visibleCount / columnCount);
+    const totalRows = Math.ceil(items.length / columnCount);
+
+    const ROWS_PER_CLICK = 1.5;
+    let currentRows = initialRows;
+
+    const rowBottom = (rowCount: number) => {
+      const gridTop = grid.getBoundingClientRect().top;
+      const clampedRowCount = Math.min(Math.max(rowCount, 1), totalRows);
+      const itemIndex = Math.min(clampedRowCount * columnCount, items.length) - 1;
+      const referenceItem = items[itemIndex] ?? items[items.length - 1];
+      if (!referenceItem) return grid.scrollHeight;
+      return referenceItem.getBoundingClientRect().bottom - gridTop;
+    };
+
+    const heightForRows = (rows: number) => {
+      const floorRows = Math.floor(rows);
+      const frac = rows - floorRows;
+      const lower = rowBottom(floorRows);
+      if (frac === 0) return lower;
+      const upper = rowBottom(floorRows + 1);
+      return lower + frac * (upper - lower);
+    };
+
+    const render = () => {
+      const isExpanded = currentRows >= totalRows;
+      grid.style.overflow = isExpanded ? "" : "hidden";
+      grid.style.maxHeight = isExpanded
+        ? `${grid.scrollHeight}px`
+        : `${heightForRows(currentRows)}px`;
+      fade?.classList.toggle("hidden", isExpanded);
+      moreButton.textContent = isExpanded ? "Ver menos" : "Ver mais";
+    };
+
+    moreButton.addEventListener("click", () => {
+      currentRows =
+        currentRows >= totalRows ? initialRows : Math.min(currentRows + ROWS_PER_CLICK, totalRows);
+      render();
+    });
+
+    render();
+    window.addEventListener("resize", () => {
+      if (currentRows < totalRows) render();
+    });
+  }
 </script>

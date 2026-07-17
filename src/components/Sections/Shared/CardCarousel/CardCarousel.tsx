@@ -47,7 +47,7 @@ export function CardCarousel({ title, slides }: Props) {
 
   return (
     <div className="flex w-full flex-col gap-3">
-      <h2 className="section-title mb-3 xl:mb-12">{title}</h2>
+      <h2 className="section-title mb-3 lg:mb-10">{title}</h2>
 
       <div className="flex flex-col gap-4 overflow-hidden rounded-2xl bg-secondary p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
         <h3

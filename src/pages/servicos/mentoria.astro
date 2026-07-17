@@ -2,6 +2,9 @@
 import Root from "@/components/Layout/Root.astro";
 import MiniHeroBanner from "@/components/Sections/Shared/MiniHeroBanner/index.astro";
 import CardCarousel from "@/components/Sections/Shared/CardCarousel/index.astro";
+import Methodologies from "@/components/Sections/Mentoria/Methodologies.astro";
+import DevelopedSkills from "@/components/Sections/Mentoria/DevelopedSkills/index.astro";
+import CoveredTopics from "@/components/Sections/Shared/CoveredTopics/index.astro";
 import { helpSlides } from "@/data/Mentoring/help";
 
 export const prerender = true;
@@ -14,4 +17,7 @@ export const prerender = true;
     subtitle="Usando metodologias exclusivas, construídas ao longo de 18 anos de Recursos Humanos e Psicologia, com atendimento direto e foco em resultado."
   />
   <CardCarousel title="Como podemos te ajudar" slides={helpSlides} />
+  <Methodologies />
+  <CoveredTopics title="Conteúdos abordados na mentoria" />
+  <DevelopedSkills />
 </Root>

@@ -8,13 +8,13 @@ export function MomentsExplorer() {
   const moments = momentsByAudience[audience];
 
   return (
-    <div className="flex w-full flex-col items-center gap-8">
+    <div className="flex w-full flex-col items-center gap-2 lg:gap-8">
       <div className="sticky top-16 z-30 w-full bg-tertiary max-lg:py-3 lg:static lg:z-auto lg:bg-transparent lg:py-0">
         <SegmentedControl
           className="w-full"
           options={[
-            { label: "Pessoa Física", mobileLabel: "P. Física", value: "pf" },
-            { label: "Pessoa Jurídica", mobileLabel: "P. Jurídica", value: "pj" },
+            { label: "Pessoa Física", value: "pf" },
+            { label: "Pessoa Jurídica", value: "pj" },
           ]}
           value={audience}
           onChange={(value) => setAudience(value as Audience)}

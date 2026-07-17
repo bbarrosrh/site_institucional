@@ -15,9 +15,6 @@ const variantClasses = {
   light: "bg-white text-secondary hover:bg-white/90 disabled:hover:bg-white",
 };
 
-// Mesmo visual do carrossel de depoimentos (Home/Testimonials), extraído aqui para reuso —
-// aquele é Astro + script vanilla e não pode ser importado num .tsx. A variante "light"
-// (fundo branco, chevron vermelho) é para uso sobre fundo colorido.
 export function CarouselNavButton({
   direction,
   label,

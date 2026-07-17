@@ -1,0 +1,156 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { CarouselNavButton } from "@/components/CarouselNavButton";
+import Card from "./Card.astro";
+import { coveredTopics } from "@/data/coveredTopics";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Section secondary>
+  <div class="grid w-full gap-8 lg:gap-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-x-6">
+    <h2 class="section-title lg:text-left">{title}</h2>
+
+    <div
+      class="order-3 flex items-center justify-between gap-4 lg:order-2 lg:justify-end max-lg:-mt-3"
+    >
+      <CarouselNavButton
+        client:load
+        direction="prev"
+        label="Anterior"
+        className="covered-topics-prev order-1 lg:order-2"
+      />
+
+      <div class="covered-topics-dots order-2 flex gap-2 lg:order-1">
+        {
+          coveredTopics.map((_, index) => (
+            <button
+              type="button"
+              aria-label={`Ir para o item ${index + 1}`}
+              class="covered-topics-dot size-2.5 cursor-pointer rounded-full bg-primary/25 lg:h-1.5 lg:w-8"
+            />
+          ))
+        }
+      </div>
+
+      <CarouselNavButton
+        client:load
+        direction="next"
+        label="Próximo"
+        className="covered-topics-next order-3"
+      />
+    </div>
+
+    <div class="relative order-2 lg:order-3 lg:col-span-2 lg:bleed-left lg:bleed-right min-w-0">
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-32 bg-linear-to-r from-black to-transparent lg:block"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-32 bg-linear-to-l from-black to-transparent lg:block"
+      >
+      </div>
+
+      <div
+        class="covered-topics-track flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none lg:container-pl lg:container-pr lg:scroll-pl [&::-webkit-scrollbar]:hidden"
+      >
+        {coveredTopics.map((topic) => <Card topic={topic} />)}
+      </div>
+    </div>
+  </div>
+</Section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".covered-topics-track").forEach((track) => {
+    const scope = track.closest("section") ?? document;
+    const dots = Array.from(scope.querySelectorAll<HTMLButtonElement>(".covered-topics-dot"));
+    const prevButton = scope.querySelector<HTMLButtonElement>(".covered-topics-prev");
+    const nextButton = scope.querySelector<HTMLButtonElement>(".covered-topics-next");
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (!prevButton || !nextButton || cards.length === 0) return;
+
+    const gapPx = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const cardStep = () => cards[0].getBoundingClientRect().width + gapPx();
+    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+
+    let stops = [0];
+
+    const computeStops = () => {
+      const max = maxScroll();
+      const step = cardStep();
+      const result = [0];
+
+      if (step > 0) {
+        let next = step;
+        while (next < max - 1 && result.length < cards.length) {
+          result.push(next);
+          next += step;
+        }
+      }
+
+      if (max > result[result.length - 1] + 1) result.push(max);
+      return result;
+    };
+
+    const syncStops = () => {
+      stops = computeStops();
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("hidden", index >= stops.length);
+      });
+    };
+
+    const activeStopIndex = () => {
+      let closest = 0;
+      let closestDistance = Infinity;
+      stops.forEach((stop, index) => {
+        const distance = Math.abs(track.scrollLeft - stop);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = index;
+        }
+      });
+      return closest;
+    };
+
+    const goToStop = (index: number) => {
+      const clamped = Math.max(0, Math.min(index, stops.length - 1));
+      track.scrollTo({ left: stops[clamped], behavior: "smooth" });
+    };
+
+    const update = () => {
+      const index = activeStopIndex();
+
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("bg-primary", dotIndex === index);
+        dot.classList.toggle("bg-primary/25", dotIndex !== index);
+      });
+
+      prevButton.disabled = index <= 0;
+      nextButton.disabled = index >= stops.length - 1;
+    };
+
+    prevButton.addEventListener("click", () => goToStop(activeStopIndex() - 1));
+    nextButton.addEventListener("click", () => goToStop(activeStopIndex() + 1));
+
+    dots.forEach((dot, dotIndex) => {
+      dot.addEventListener("click", () => goToStop(dotIndex));
+    });
+
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", () => {
+      syncStops();
+      update();
+    });
+
+    syncStops();
+    update();
+    setTimeout(() => {
+      syncStops();
+      update();
+    }, 50);
+  });
+</script>

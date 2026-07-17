@@ -49,9 +49,24 @@
   margin-right: calc(-1 * (var(--container-px) + max(0px, (100vw - 100rem) / 2)));
 }
 
+/* Fully ignore section-container left padding */
+@utility bleed-left {
+  margin-left: calc(-1 * (var(--container-px) + max(0px, (100vw - 100rem) / 2)));
+}
+
 /* Left padding matching section-container's inset, for full-bleed layouts without section-container */
 @utility container-pl {
   padding-left: max(var(--container-px), calc(var(--container-px) + (100vw - 100rem) / 2));
+}
+
+/* Right padding matching section-container's inset, to stop a bleed-right scroll area at the same edge */
+@utility container-pr {
+  padding-right: max(var(--container-px), calc(var(--container-px) + (100vw - 100rem) / 2));
+}
+
+/* Scroll padding to keep the CSS scroll-snap aligned with the container */
+@utility scroll-pl {
+  scroll-padding-left: max(var(--container-px), calc(var(--container-px) + (100vw - 100rem) / 2));
 }
 
 /* Checkered line grid used as a section background decoration */

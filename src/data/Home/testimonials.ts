@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
     name: "Ana Prado",
     role: "SAP - Desenvolvimento de negócios",
     quote:
-      "Aprendi que o NÃO é necessário e importante. Entendi que a minha vontade e a minha busca por um lugar melhor é o começo da minha caminhada. Percebi que temos sim a opção de escolher onde queremos estar e forças para buscar esse sonho independente da nossa cor de pele ou da nossa sexualidade porque o que conta é a nossa bagagem, nosso aprendizado, nossa dedicação e nosso compromisso.",
+      "Percebi que temos sim a opção de escolher onde queremos estar e forças para buscar esse sonho independente da nossa cor de pele ou da nossa sexualidade porque o que conta é a nossa bagagem, nosso aprendizado, nossa dedicação e nosso compromisso.",
   },
   {
     name: "Ana Mazer",

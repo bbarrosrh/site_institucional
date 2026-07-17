@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { name, role, quote } = Astro.props;
-const width = Math.min(80, Math.max(36, Math.round(quote.length / 4)));
 
 const initials = name
   .split(" ")
@@ -19,8 +18,7 @@ const initials = name
 ---
 
 <div
-  class="testimonial-card flex h-full min-w-64 w-full shrink-0 flex-col gap-6 rounded-2xl border border-white/10 p-6 lg:w-(--card-w)"
-  style={`--card-w: ${width}ch;`}
+  class="testimonial-card flex h-full w-full min-w-0 flex-col gap-6 rounded-2xl border border-white/10 p-6"
 >
   <div class="flex items-center gap-3">
     <span
@@ -28,14 +26,14 @@ const initials = name
     >
       {initials}
     </span>
-    <div>
+    <div class="min-w-0">
       <p class="font-medium text-white">{name}</p>
       <p class="text-sm text-white/60">{role}</p>
     </div>
   </div>
 
-  <div class="flex items-start gap-2">
+  <div class="flex min-w-0 items-start gap-2">
     <Icon name="quote" className="size-8 shrink-0" />
-    <p class="text-[15px] text-white/85">{quote}</p>
+    <p class="min-w-0 text-[15px] text-white/85">{quote}</p>
   </div>
 </div>
