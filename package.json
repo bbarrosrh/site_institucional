@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "email": "email dev --dir src/emails --port 3000"
   },
   "keywords": [
     "astro",
@@ -20,9 +21,12 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/react": "^5.0.7",
+    "@astrojs/vercel": "^10.0.8",
     "@fontsource/caveat": "^5.2.8",
     "@fontsource/lora": "^5.2.8",
     "@fontsource/manrope": "^5.2.8",
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.1.0",
     "@sanity/astro": "^3.4.0",
     "@sanity/client": "^7.22.1",
     "@tabler/icons-react": "^3.44.0",
@@ -32,16 +36,21 @@
     "astro": "^6.4.4",
     "clsx": "^2.1.1",
     "isomorphic-dompurify": "^3.16.0",
+    "nanostores": "^1.4.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-email": "^6.9.0",
     "react-is": "^19.2.7",
+    "resend": "^6.17.2",
     "sanity": "^5.30.0",
     "styled-components": "^6.4.2",
     "tailwind-merge": "^3.6.0",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@react-email/ui": "^6.9.0",
     "@types/dompurify": "^3.0.5",
     "@types/node": "^25.9.3",
     "prettier": "3.8.3",

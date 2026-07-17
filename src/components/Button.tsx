@@ -4,6 +4,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "outline";
   href?: string;
+  isContact?: boolean;
 }
 
 export function Button({
@@ -13,6 +14,7 @@ export function Button({
   className,
   children,
   href,
+  isContact,
   ...props
 }: Props) {
   const sizeClasses = {
@@ -37,14 +39,19 @@ export function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} data-contact-cta={isContact ? "true" : undefined}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type={type} className={classes} {...props}>
+    <button
+      type={type}
+      className={classes}
+      data-contact-cta={isContact ? "true" : undefined}
+      {...props}
+    >
       {children}
     </button>
   );

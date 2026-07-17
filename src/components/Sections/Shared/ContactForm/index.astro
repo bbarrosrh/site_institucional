@@ -1,0 +1,275 @@
+---
+import { cn } from "@/utils/className";
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import { Listbox } from "./Listbox";
+import { contactSubjects } from "@/data/contact";
+
+const inputClass =
+  "w-full rounded-lg border border-white/10 bg-black px-4 py-3 text-white placeholder:text-white/40 focus:border-primary focus:outline-none";
+
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+
+const uid = crypto.randomUUID().slice(0, 8);
+const fid = (base: string) => `${base}-${uid}`;
+---
+
+<div class="flex flex-col gap-6">
+  <div>
+    <h2
+      class="max-sm:p-3 max-sm:pb-0 lg:mb-4 max-sm:text-center font-heading text-2xl font-semibold text-primary lg:text-4xl"
+    >
+      Vamos Conversar
+    </h2>
+    <p class="max-sm:p-3 max-sm:text-center max-sm:text-sm mt-2 leading-relaxed">
+      Nossa equipe multidisciplinar está sempre de portas abertas. <br />
+      Entre em contato hoje mesmo!
+    </p>
+  </div>
+
+  <form class="contact-form flex flex-col gap-4">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="flex flex-col gap-1">
+        <label for={fid("contact-name")} class="text-sm text-white/80"> Seu nome </label>
+        <input
+          id={fid("contact-name")}
+          name="name"
+          type="text"
+          required
+          placeholder="Digite aqui"
+          class={inputClass}
+        />
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for={fid("contact-email")} class="text-sm text-white/80"> Email </label>
+        <input
+          id={fid("contact-email")}
+          name="email"
+          type="email"
+          required
+          placeholder="Digite aqui"
+          class={inputClass}
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for={fid("contact-subject")} class="text-sm text-white/80"> Assunto </label>
+      <Listbox
+        client:load
+        id={fid("contact-subject")}
+        name="subject"
+        options={contactSubjects}
+        placeholder="Selecione um assunto"
+      />
+      <p class="subject-error hidden text-sm text-red-400">Selecione um assunto.</p>
+    </div>
+
+    <div class="resume-wrapper hidden flex-col gap-1">
+      <label for={fid("contact-resume")} class="text-sm text-white/80"> Currículo </label>
+      <input
+        id={fid("contact-resume")}
+        name="resume"
+        type="file"
+        accept="application/pdf"
+        class="w-full rounded-lg border border-white/10 bg-black p-2 text-sm text-white/40 file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-black hover:file:bg-primary-emphasis focus:border-primary focus:outline-none"
+      />
+      <p class="resume-error hidden text-sm text-red-400">Anexe seu currículo (máximo 2MB).</p>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for={fid("contact-message")} class="message-label text-sm text-white/80">
+        Mensagem
+      </label>
+      <textarea
+        id={fid("contact-message")}
+        name="message"
+        required
+        rows="6"
+        maxlength="1000"
+        placeholder="Digite aqui"
+        class={cn(inputClass, "message-textarea resize-none scrollbar-mini")}></textarea>
+      <input
+        id={fid("contact-job-type")}
+        type="text"
+        placeholder="Ex.: Analista de Marketing"
+        class={cn(inputClass, "job-type-input hidden")}
+      />
+    </div>
+
+    <label class="flex items-center gap-2 text-sm sm:text-lg text-white/80 my-2 sm:my-4">
+      <input
+        type="checkbox"
+        required
+        class="size-4 rounded border-white/20 bg-black accent-primary"
+      />
+      Li, entendi e concordo com a política de privacidade.
+    </label>
+
+    <div class="flex flex-col gap-2 mb-4">
+      <div class="recaptcha-wrapper origin-top-left">
+        <div class="g-recaptcha" data-sitekey={recaptchaSiteKey}></div>
+      </div>
+      <p class="recaptcha-error hidden text-sm text-red-400">Confirme que você não é um robô.</p>
+    </div>
+
+    <Button type="submit" variant="secondary" size="lg" className="submit w-full justify-center">
+      Enviar mensagem
+      <Icon name="arrow-right" />
+    </Button>
+
+    <span class="submit-spinner hidden">
+      <Icon name="loader" className="animate-spin" />
+    </span>
+  </form>
+</div>
+
+<script>
+  import { talentBankSubject } from "@/data/contact";
+
+  declare const grecaptcha: {
+    getResponse: (widgetId?: number) => string;
+    reset: (widgetId?: number) => void;
+  };
+
+  const MAX_RESUME_SIZE = 2 * 1024 * 1024;
+  const RECAPTCHA_WIDTH = 304;
+  const RECAPTCHA_HEIGHT = 78;
+
+  function initContactForm(form: HTMLFormElement) {
+    const submitButton = form.querySelector<HTMLButtonElement>(".submit");
+    const submitSpinner = form.querySelector<HTMLSpanElement>(".submit-spinner");
+    const subjectInput = form.querySelector<HTMLInputElement>('input[name="subject"]');
+    const subjectError = form.querySelector<HTMLParagraphElement>(".subject-error");
+    const resumeWrapper = form.querySelector<HTMLDivElement>(".resume-wrapper");
+    const resumeInput = form.querySelector<HTMLInputElement>('input[name="resume"]');
+    const resumeError = form.querySelector<HTMLParagraphElement>(".resume-error");
+    const messageLabel = form.querySelector<HTMLLabelElement>(".message-label");
+    const messageTextarea = form.querySelector<HTMLTextAreaElement>(".message-textarea");
+    const jobTypeInput = form.querySelector<HTMLInputElement>(".job-type-input");
+    const recaptchaError = form.querySelector<HTMLParagraphElement>(".recaptcha-error");
+    const recaptchaWrapper = form.querySelector<HTMLDivElement>(".recaptcha-wrapper");
+    const recaptchaContainer = form.querySelector<HTMLDivElement>(".g-recaptcha");
+
+    const getRecaptchaWidgetId = () => {
+      if (!recaptchaContainer) return undefined;
+      const index = Array.from(document.querySelectorAll(".g-recaptcha")).indexOf(
+        recaptchaContainer
+      );
+      return index >= 0 ? index : undefined;
+    };
+
+    const isTalentBankSelected = () => subjectInput?.value === talentBankSubject;
+
+    const updateSubjectDependentFields = () => {
+      const isTalentBank = isTalentBankSelected();
+
+      resumeWrapper?.classList.toggle("hidden", !isTalentBank);
+      resumeWrapper?.classList.toggle("flex", isTalentBank);
+      if (resumeInput) resumeInput.required = isTalentBank;
+
+      if (!isTalentBank && resumeInput) {
+        resumeInput.value = "";
+        resumeInput.setCustomValidity("");
+        resumeError?.classList.add("hidden");
+      }
+
+      if (messageLabel) {
+        messageLabel.textContent = isTalentBank ? "Tipo de vaga desejada" : "Mensagem";
+      }
+
+      messageTextarea?.classList.toggle("hidden", isTalentBank);
+      if (messageTextarea) {
+        messageTextarea.required = !isTalentBank;
+        messageTextarea.name = isTalentBank ? "" : "message";
+      }
+
+      jobTypeInput?.classList.toggle("hidden", !isTalentBank);
+      if (jobTypeInput) {
+        jobTypeInput.required = isTalentBank;
+        jobTypeInput.name = isTalentBank ? "message" : "";
+        if (!isTalentBank) jobTypeInput.value = "";
+      }
+    };
+
+    subjectInput?.addEventListener("change", updateSubjectDependentFields);
+    updateSubjectDependentFields();
+
+    resumeInput?.addEventListener("change", () => {
+      const file = resumeInput.files?.[0];
+      const tooLarge = !!file && file.size > MAX_RESUME_SIZE;
+
+      resumeError?.classList.toggle("hidden", !tooLarge);
+      resumeInput.setCustomValidity(tooLarge ? "Arquivo maior que 2MB." : "");
+
+      if (tooLarge) resumeInput.value = "";
+    });
+
+    const scaleRecaptcha = () => {
+      if (!recaptchaWrapper?.parentElement) return;
+      const scale = Math.min(1, recaptchaWrapper.parentElement.clientWidth / RECAPTCHA_WIDTH);
+      recaptchaWrapper.style.transform = `scale(${scale})`;
+      recaptchaWrapper.style.width = `${RECAPTCHA_WIDTH * scale}px`;
+      recaptchaWrapper.style.height = `${RECAPTCHA_HEIGHT * scale}px`;
+    };
+
+    scaleRecaptcha();
+    window.addEventListener("resize", scaleRecaptcha);
+
+    if (!submitButton) return;
+    const originalContent = submitButton.innerHTML;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+
+      const subjectMissing = !formData.get("subject")?.toString().trim();
+      subjectError?.classList.toggle("hidden", !subjectMissing);
+      if (subjectMissing) return;
+
+      const file = resumeInput?.files?.[0];
+      if (file && file.size > MAX_RESUME_SIZE) {
+        resumeError?.classList.remove("hidden");
+        return;
+      }
+      if (isTalentBankSelected() && !file) {
+        resumeError?.classList.remove("hidden");
+        return;
+      }
+
+      const widgetId = getRecaptchaWidgetId();
+      const recaptchaToken =
+        typeof grecaptcha !== "undefined" ? grecaptcha.getResponse(widgetId) : "";
+      if (!recaptchaToken) {
+        recaptchaError?.classList.remove("hidden");
+        return;
+      }
+      recaptchaError?.classList.add("hidden");
+
+      submitButton.disabled = true;
+      if (submitSpinner) submitButton.innerHTML = submitSpinner.innerHTML;
+
+      try {
+        const response = await fetch("/api/contato", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error("Falha no envio");
+
+        submitButton.textContent = "Enviado com sucesso!";
+        submitButton.classList.remove("bg-secondary", "hover:bg-secondary-emphasis");
+        submitButton.classList.add("bg-green-800", "cursor-auto!");
+      } catch (error) {
+        console.error("Erro ao enviar formulário de contato:", error);
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalContent;
+        if (typeof grecaptcha !== "undefined") grecaptcha.reset(widgetId);
+        alert("Não foi possível enviar sua mensagem. Tente novamente mais tarde.");
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLFormElement>(".contact-form").forEach(initContactForm);
+</script>

@@ -1,72 +1,13 @@
 ---
-import { cn } from "@/utils/className";
-import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { Listbox } from "@/components/Sections/Home/Contact/Listbox";
-import { contactSubjects } from "@/data/Home/contact";
+import ContactForm from "@/components/Sections/Shared/ContactForm/index.astro";
 import homemVitruviano from "@/assets/images/Home/homem_vitruviano.png";
-
-const inputClass =
-  "w-full rounded-lg border border-white/10 bg-black px-4 py-3 text-white placeholder:text-white/40 focus:border-primary focus:outline-none";
 ---
 
-<section class="section-wrapper bg-black text-white">
+<section id="contato" class="section-wrapper bg-black text-white">
   <div class="section-container">
     <div class="grid overflow-hidden rounded-xl sm:rounded-3xl bg-tertiary lg:grid-cols-2">
-      <div class="flex flex-col gap-6 p-2 sm:p-8 lg:p-12">
-        <div>
-          <h2 class="max-sm:p-3 max-sm:pb-0 max-sm:text-center font-heading text-2xl font-semibold text-primary lg:text-4xl">
-            Vamos Conversar
-          </h2>
-          <p class="max-sm:p-3 max-sm:text-center max-sm:text-sm mt-2 leading-relaxed">
-            Nossa equipe multidisciplinar está sempre de portas abertas. <br />
-            Entre em contato hoje mesmo!
-          </p>
-        </div>
-
-        <form class="flex flex-col gap-4">
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="flex flex-col gap-1">
-              <label for="contact-name" class="text-sm text-white/80"> Seu nome </label>
-              <input id="contact-name" type="text" placeholder="Digite aqui" class={inputClass} />
-            </div>
-            <div class="flex flex-col gap-1">
-              <label for="contact-email" class="text-sm text-white/80"> Email </label>
-              <input id="contact-email" type="email" placeholder="Digite aqui" class={inputClass} />
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <label for="contact-subject" class="text-sm text-white/80"> Assunto </label>
-            <Listbox
-              client:load
-              id="contact-subject"
-              name="subject"
-              options={contactSubjects}
-              placeholder="Selecione um assunto"
-            />
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <label for="contact-message" class="text-sm text-white/80"> Mensagem </label>
-            <textarea
-              id="contact-message"
-              rows="6"
-              maxlength="1000"
-              placeholder="Digite aqui"
-              class={cn(inputClass, "resize-none scrollbar-mini")}></textarea>
-          </div>
-
-          <label class="flex items-center gap-2 text-sm sm:text-lg text-white/80 my-2 sm:my-4">
-            <input type="checkbox" class="size-4 rounded border-white/20 bg-black accent-primary" />
-            Li, entendi e concordo com a política de privacidade.
-          </label>
-
-          <Button type="button" variant="secondary" size="lg" className="w-full justify-center">
-            Enviar mensagem
-            <Icon name="arrow-right" />
-          </Button>
-        </form>
+      <div class="p-2 sm:p-8 lg:p-12">
+        <ContactForm />
       </div>
 
       <div class="relative hidden lg:block">
@@ -75,3 +16,5 @@ const inputClass =
     </div>
   </div>
 </section>
+
+<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>

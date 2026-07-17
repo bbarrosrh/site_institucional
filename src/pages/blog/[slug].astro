@@ -7,8 +7,12 @@ import { BLOG_SLUGS_QUERY, BLOG_POST_QUERY, type BlogPostFull } from "@/sanity/s
 import { EXAMPLE_POST_SLUG, exampleBlogPostFull } from "@/sanity/schemas/Blog/exampleData";
 import placeholder from "@/assets/images/placeholder.png";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
-  const slugs = (await sanityFetch<{ slug: string }[]>(BLOG_SLUGS_QUERY)) ?? [];
+  const slugs =
+    (await sanityFetch<{ slug: string }[]>(BLOG_SLUGS_QUERY, {}, { perspective: "published" })) ??
+    [];
   if (slugs.length === 0) {
     slugs.push({ slug: EXAMPLE_POST_SLUG });
   }

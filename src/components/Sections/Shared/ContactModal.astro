@@ -1,0 +1,87 @@
+---
+import ContactForm from "@/components/Sections/Shared/ContactForm/index.astro";
+import { Icon } from "@/components/Icon";
+---
+
+<div
+  id="contact-modal"
+  class="fixed inset-0 z-100 hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+  aria-hidden="true"
+>
+  <div id="contact-modal-backdrop" class="absolute inset-0 bg-black/80"></div>
+
+  <div
+    id="contact-modal-card"
+    class="relative h-[90dvh] w-full scale-85 overflow-hidden rounded-xl bg-tertiary transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] sm:rounded-3xl lg:h-[75dvh] lg:w-1/2"
+  >
+    <button
+      id="contact-modal-close"
+      type="button"
+      aria-label="Fechar"
+      class="absolute right-4 top-4 z-10 flex size-9 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+    >
+      <Icon name="close" size={20} />
+    </button>
+
+    <div class="scrollbar-mini h-full overflow-y-auto p-2 sm:p-8">
+      <ContactForm />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { isContactModalOpen } from "@/stores/contactModal";
+
+  const modal = document.querySelector<HTMLDivElement>("#contact-modal");
+  const card = document.querySelector<HTMLDivElement>("#contact-modal-card");
+  const backdrop = document.querySelector<HTMLDivElement>("#contact-modal-backdrop");
+  const closeButton = document.querySelector<HTMLButtonElement>("#contact-modal-close");
+
+  let recaptchaLoaded = !!document.querySelector('script[src*="recaptcha/api.js"]');
+  const ensureRecaptcha = () => {
+    if (recaptchaLoaded) return;
+    recaptchaLoaded = true;
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  };
+
+  modal?.addEventListener("transitionend", (event) => {
+    if (event.target !== modal || isContactModalOpen.get()) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  });
+
+  isContactModalOpen.subscribe((open) => {
+    if (!modal || !card) return;
+
+    if (open) {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      void modal.offsetHeight;
+
+      modal.classList.remove("opacity-0");
+      card.classList.remove("scale-85");
+    } else {
+      modal.classList.add("opacity-0");
+      card.classList.add("scale-85");
+    }
+
+    modal.setAttribute("aria-hidden", String(!open));
+    document.body.classList.toggle("overflow-hidden", open);
+
+    if (open) {
+      ensureRecaptcha();
+      requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+    }
+  });
+
+  closeButton?.addEventListener("click", () => isContactModalOpen.set(false));
+  backdrop?.addEventListener("click", () => isContactModalOpen.set(false));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") isContactModalOpen.set(false);
+  });
+</script>

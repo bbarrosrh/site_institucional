@@ -2,6 +2,7 @@ import { cn } from "@/utils/className";
 
 interface Option {
   label: string;
+  mobileLabel?: string;
   value: string;
 }
 
@@ -28,7 +29,14 @@ export function SegmentedControl({ options, value, onChange, className }: Props)
               isActive ? "bg-primary text-black" : "text-white hover:text-primary"
             )}
           >
-            {option.label}
+            {option.mobileLabel ? (
+              <>
+                <span className="sm:hidden">{option.mobileLabel}</span>
+                <span className="hidden sm:inline">{option.label}</span>
+              </>
+            ) : (
+              option.label
+            )}
           </button>
         );
       })}

@@ -1,3 +1,3 @@
-# Astro Template
+# Site Institucional B. Barros
 
-Um template profissional para sites marcônicos!
+Feito com Astro, React, Tailwind e Sanity

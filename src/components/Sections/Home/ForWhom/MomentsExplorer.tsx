@@ -13,8 +13,8 @@ export function MomentsExplorer() {
         <SegmentedControl
           className="w-full"
           options={[
-            { label: "Pessoa Física", value: "pf" },
-            { label: "Pessoa Jurídica", value: "pj" },
+            { label: "Pessoa Física", mobileLabel: "P. Física", value: "pf" },
+            { label: "Pessoa Jurídica", mobileLabel: "P. Jurídica", value: "pj" },
           ]}
           value={audience}
           onChange={(value) => setAudience(value as Audience)}

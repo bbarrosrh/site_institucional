@@ -19,6 +19,8 @@ import {
   IconMicrophoneFilled,
   IconPresentationFilled,
   IconShieldCheckFilled,
+  IconInfoCircleFilled,
+  IconLoader2,
 } from "@tabler/icons-react";
 import { IconCompassCustom, IconInstituteCustom } from "./CustomIcons";
 
@@ -45,6 +47,8 @@ export const iconMap = {
   microphone: IconMicrophoneFilled,
   presentation: IconPresentationFilled,
   "shield-check": IconShieldCheckFilled,
+  "info-circle": IconInfoCircleFilled,
+  loader: IconLoader2,
 } as const;
 
 export type IconName = keyof typeof iconMap;

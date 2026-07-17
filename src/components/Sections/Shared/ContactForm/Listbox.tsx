@@ -15,6 +15,11 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    hiddenInputRef.current?.dispatchEvent(new Event("change", { bubbles: true }));
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,7 +59,7 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
 
   return (
     <div ref={rootRef} className={cn("relative", className)}>
-      {name && <input type="hidden" name={name} value={value} />}
+      {name && <input ref={hiddenInputRef} type="hidden" name={name} value={value} />}
 
       <button
         id={id}
@@ -74,26 +79,28 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
       </button>
 
       {isOpen && (
-        <ul
-          role="listbox"
-          className="absolute z-20 mt-2 flex flex-col gap-1 max-h-60 w-full overflow-auto rounded-lg bg-black p-1 shadow-xl"
-        >
-          {options.map((option, index) => (
-            <li
-              key={option}
-              role="option"
-              aria-selected={value === option}
-              onClick={() => selectOption(option)}
-              onMouseEnter={() => setActiveIndex(index)}
-              className={cn(
-                "cursor-pointer rounded-sm px-4 py-2 text-white",
-                (index === activeIndex || value === option) && "bg-white/10 text-primary"
-              )}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+        <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-lg border border-white/15 bg-black shadow-xl">
+          <ul
+            role="listbox"
+            className="flex max-h-50 flex-col gap-1 overflow-auto p-1 scrollbar-mini"
+          >
+            {options.map((option, index) => (
+              <li
+                key={option}
+                role="option"
+                aria-selected={value === option}
+                onClick={() => selectOption(option)}
+                onMouseEnter={() => setActiveIndex(index)}
+                className={cn(
+                  "cursor-pointer rounded-sm px-4 py-2 text-white",
+                  (index === activeIndex || value === option) && "bg-white/10 text-primary"
+                )}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
