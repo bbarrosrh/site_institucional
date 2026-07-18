@@ -5,7 +5,12 @@ import CardCarousel from "@/components/Sections/Shared/CardCarousel/index.astro"
 import Methodologies from "@/components/Sections/Mentoria/Methodologies.astro";
 import DevelopedSkills from "@/components/Sections/Mentoria/DevelopedSkills/index.astro";
 import CoveredTopics from "@/components/Sections/Shared/CoveredTopics/index.astro";
+import Mentors from "@/components/Sections/Shared/Mentors.astro";
+import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
+
 import { helpSlides } from "@/data/Mentoring/help";
+import { talentBankSubject } from "@/data/contact";
+import homemVitruviano from "@/assets/images/Mentoria/homem_vitruviano.png";
 
 export const prerender = true;
 ---
@@ -20,4 +25,17 @@ export const prerender = true;
   <Methodologies />
   <CoveredTopics title="Conteúdos abordados na mentoria" />
   <DevelopedSkills />
+  <CallToAction
+    title="Entre no nosso banco de talentos"
+    subtitle="Envie seu currículo e conecte-se a futuras oportunidades que combinam com o seu talento."
+    image={homemVitruviano}
+    buttonText="Mande seu currículo"
+    contactSubject={talentBankSubject}
+    noFade
+  />
+  <Mentors />
+  <CallToAction
+    title="Pronto para dar o próximo passo?"
+    subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."
+  />
 </Root>

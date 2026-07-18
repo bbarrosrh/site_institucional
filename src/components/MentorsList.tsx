@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/utils/className";
-import type { Mentor } from "@/data/About/mentors";
+import type { Mentor } from "@/data/mentors";
 
 interface Props {
   mentors: Mentor[];

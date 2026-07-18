@@ -28,10 +28,10 @@ const eyebrow = eyebrows[icon];
 const eyebrowIcon = eyebrowIcons[icon];
 ---
 
-<section class="relative flex h-[75dvh] items-center overflow-hidden bg-black py-24 text-white">
+<section class="relative flex h-[57dvh] lg:h-[70dvh] items-end overflow-hidden bg-black pt-24 pb-12 text-white">
   <div class="bg-grid pointer-events-none absolute inset-0"></div>
 
-  <div class="section-container relative grid items-center gap-10 lg:grid-cols-2">
+  <div class="section-container relative grid items-end gap-10 lg:grid-cols-2">
     <div class="flex flex-col items-center gap-8 lg:gap-12 text-center lg:items-start lg:text-left">
       <div class="flex flex-col gap-5 max-lg:items-center">
         <div class="flex max-lg:flex-col items-center gap-4">
@@ -52,7 +52,7 @@ const eyebrowIcon = eyebrowIcons[icon];
       <p class="w-4/5 leading-relaxed text-white sm:text-xl">{subtitle}</p>
 
       <div>
-        <Button variant="secondary" size="lg" isContact>
+        <Button variant="secondary" size="lg" contactCta>
           Agende uma conversa
           <Icon name="arrow-right" />
         </Button>
@@ -60,7 +60,7 @@ const eyebrowIcon = eyebrowIcons[icon];
     </div>
 
     <div class="hidden justify-center lg:flex lg:justify-end">
-      <GoldIcon variant={icon} class="size-72 lg:size-96 xl:size-128" />
+      <GoldIcon variant={icon} class="size-72 lg:size-96 xl:size-110" />
     </div>
   </div>
 </section>

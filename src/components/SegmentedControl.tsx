@@ -3,6 +3,7 @@ import { cn } from "@/utils/className";
 interface Option {
   label: string;
   value: string;
+  badge?: string;
   secondary?: boolean;
 }
 
@@ -35,6 +36,7 @@ export function SegmentedControl({ options, value, onChange, className, secondar
             onClick={() => onChange(option.value)}
             className={cn(
               "cursor-pointer whitespace-nowrap font-semibold text-sm lg:text-lg",
+              "flex items-center justify-center gap-2",
               "rounded-lg px-6 py-2 sm:px-10",
               "max-md:shrink-0 max-md:snap-start",
               "md:flex-1",
@@ -47,6 +49,16 @@ export function SegmentedControl({ options, value, onChange, className, secondar
                   )
             )}
           >
+            {option.badge && (
+              <span
+                className={cn(
+                  "rounded-md px-2 py-0.5 text-sm font-bold",
+                  isActive ? "bg-black text-primary" : "bg-white text-black"
+                )}
+              >
+                {option.badge}
+              </span>
+            )}
             {option.label}
           </button>
         );

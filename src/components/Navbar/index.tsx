@@ -72,7 +72,7 @@ export function Navbar({ currentPath }: Props) {
               })}
             </nav>
 
-            <Button variant="secondary" isContact>
+            <Button variant="secondary" contactCta>
               Contato
             </Button>
           </div>

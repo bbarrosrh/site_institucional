@@ -113,7 +113,7 @@ export function MobileMenuDropdown({ isOpen, close, currentPath }: DropdownProps
           );
         })}
 
-        <Button variant="secondary" className="w-full mt-4 py-3" isContact onClick={close}>
+        <Button variant="secondary" className="w-full mt-4 py-3" contactCta onClick={close}>
           Contato
         </Button>
       </div>

@@ -43,13 +43,14 @@ const { title } = Astro.props;
 </html>
 
 <script>
-  import { isContactModalOpen } from "@/stores/contactModal";
-  
+  import { isContactModalOpen, presetContactSubject } from "@/stores/contactModal";
+
   document.addEventListener("click", (event) => {
     const trigger = (event.target as HTMLElement).closest<HTMLElement>("[data-contact-cta]");
     if (!trigger) return;
 
     event.preventDefault();
+    presetContactSubject.set(trigger.dataset.contactSubject ?? null);
     isContactModalOpen.set(true);
   });
 </script>

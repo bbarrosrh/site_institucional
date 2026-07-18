@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/className";
 import { Icon } from "@/components/Icon";
+import { presetContactSubject } from "@/stores/contactModal";
 
 interface Props {
   id?: string;
@@ -20,6 +21,15 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
   useEffect(() => {
     hiddenInputRef.current?.dispatchEvent(new Event("change", { bubbles: true }));
   }, [value]);
+
+  useEffect(() => {
+    return presetContactSubject.subscribe((subject) => {
+      if (!subject || !options.includes(subject)) return;
+
+      setValue(subject);
+      presetContactSubject.set(null);
+    });
+  }, [options]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

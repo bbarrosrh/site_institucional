@@ -22,10 +22,9 @@ import {
   IconInfoCircleFilled,
   IconLoader2,
   IconCheck,
-  IconUsers,
-  IconLeaf,
-  IconBrain,
-  IconBolt,
+  IconUserFilled,
+  IconDiamondFilled,
+  IconSeedlingFilled,
 } from "@tabler/icons-react";
 import { IconCompassCustom, IconInstituteCustom } from "./CustomIcons";
 
@@ -48,7 +47,6 @@ export const iconMap = {
   "file-text": IconFileTextFilled,
   eye: IconEyeFilled,
   bolt: IconBoltFilled,
-  "bolt-outline": IconBolt,
   magnet: IconMagnetFilled,
   microphone: IconMicrophoneFilled,
   presentation: IconPresentationFilled,
@@ -56,9 +54,9 @@ export const iconMap = {
   "info-circle": IconInfoCircleFilled,
   loader: IconLoader2,
   check: IconCheck,
-  users: IconUsers,
-  leaf: IconLeaf,
-  brain: IconBrain,
+  "user-filled": IconUserFilled,
+  "diamond-filled": IconDiamondFilled,
+  "seedling-filled": IconSeedlingFilled,
 } as const;
 
 export type IconName = keyof typeof iconMap;

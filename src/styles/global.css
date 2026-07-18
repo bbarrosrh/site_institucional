@@ -12,6 +12,47 @@
   --color-secondary: #a1162d;
   --color-secondary-emphasis: #811224;
   --color-tertiary: #1c1c1f;
+
+  --animate-slide-in-from-right: slide-in-from-right 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-in-from-left: slide-in-from-left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-out-to-left: slide-out-to-left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-out-to-right: slide-out-to-right 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-to-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-out-to-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @media (min-width: 1024px) {
