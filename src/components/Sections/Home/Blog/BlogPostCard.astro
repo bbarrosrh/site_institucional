@@ -2,6 +2,7 @@
 import { Icon } from "@/components/Icon";
 import type { BlogPost } from "@/sanity/schemas/Blog/data";
 import placeholder from "@/assets/images/placeholder.png";
+import { Route } from "@/data/routes";
 
 interface Props {
   post: BlogPost;
@@ -24,7 +25,7 @@ function formatDate(date: string) {
 ---
 
 <a
-  href={`/blog/${post.slug}`}
+  href={Route.blogPost(post.slug)}
   target="_blank"
   rel="noopener noreferrer"
   class:list={[

@@ -13,42 +13,41 @@ export const methodologies: Methodology[] = [
   {
     name: "7em4",
     description:
-      "Trabalharemos o seu desenvolvimento técnico, comportamental, emocional e estratégico, preparando o profissional para atuar com segurança, protagonismo e alta performance.",
+      "Trabalharemos o seu desenvolvimento técnico, comportamental, emocional e estratégico, preparando o profissional para atuar com segurança e protagonismo:",
     steps: [
       {
-        title: "Lorem ipsum dolor sit amet",
+        title: "Visibilidade e Reestruturação de perfil",
         description:
-          "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.",
+          "Ajustar vitrine profissional, LinkedIn, negócios e, se houver, portfólios, apresentações etc. Apoio em estratégias que condizem com a tendência estratégica do mercado, adotando postura em Liderança e Visibilidade.",
       },
       {
-        title: "Ut enim ad minim veniam",
+        title: "Persuasão",
         description:
-          "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.",
+          "Saber negociar, influenciar e encantar pessoas através de sua performance, postura e produtividade assertiva, proporcionando atitude positiva frente a dinâmicas de negociação objetiva e subjetiva.",
       },
       {
-        title: "Duis aute irure dolor",
+        title: "Comunicação",
         description:
-          "In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat.",
+          "Desenvolver e habilitar comunicação franca, direta e objetiva, fortalecendo a comunicação, o marketing pessoal e a tomada de negociação.",
       },
       {
-        title: "Excepteur sint occaecat",
+        title: "Planejamento",
         description:
-          "Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis.",
+          "Conhecer a interface do todo, quais forças se mantêm pelo objetivo, fraquezas e cenários desfavoráveis e revertê-los, trazendo assertividade e fortalecendo sua posição.",
       },
       {
-        title: "Sed ut perspiciatis unde",
-        description:
-          "Omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa.",
+        title: "Atualizações",
+        description: "Sugestões de cursos, conforme perfil, em Gestão e Liderança em sua área.",
       },
       {
-        title: "Nemo enim ipsam voluptatem",
+        title: "Foco em resultados",
         description:
-          "Quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione.",
+          "Identificar prioridades, ações e estratégias com foco em resultados, mantendo-se em desenvolvimento para sua área de atuação.",
       },
       {
-        title: "Neque porro quisquam est",
+        title: "Inteligência emocional",
         description:
-          "Qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora.",
+          "Explorar a capacidade de identificar e lidar com as emoções e sentimentos pessoais e de outros indivíduos, analisando ambientes e suas necessidades de forma imparcial e com foco em seu objetivo profissional.",
       },
     ],
   },
@@ -58,19 +57,19 @@ export const methodologies: Methodology[] = [
       "Esta metodologia foi criada para atender profissionais que vivem momentos de alta urgência em suas carreiras:",
     steps: [
       {
-        title: "Ut labore et dolore magna",
+        title: "Recolocação profissional acelerada",
         description:
-          "Aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+          "Para profissionais que precisam retornar ao mercado com rapidez e fortalecer seu posicionamento diante de novas oportunidades.",
       },
       {
-        title: "Consequat duis aute irure",
+        title: "Transição em processos de desligamento",
         description:
-          "Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint.",
+          "Para profissionais que receberam um aviso de desligamento — ou identificam sinais concretos de mudança — e desejam se preparar estrategicamente para essa nova etapa.",
       },
       {
-        title: "Occaecat cupidatat non proident",
+        title: "Reposicionamento de performance",
         description:
-          "Sunt in culpa qui officia deserunt mollit anim id est laborum perspiciatis unde omnis iste natus error.",
+          "Para profissionais que receberam feedbacks estruturados, possuem um Plano de Desenvolvimento Individual (PDI) em andamento ou precisam fortalecer competências e recuperar sua influência, desempenho e credibilidade no ambiente corporativo.",
       },
     ],
   },

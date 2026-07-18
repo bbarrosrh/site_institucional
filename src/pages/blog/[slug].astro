@@ -6,6 +6,7 @@ import { sanityFetch } from "@/sanity/client";
 import { BLOG_SLUGS_QUERY, BLOG_POST_QUERY, type BlogPostFull } from "@/sanity/schemas/Blog/data";
 import { EXAMPLE_POST_SLUG, exampleBlogPostFull } from "@/sanity/schemas/Blog/exampleData";
 import placeholder from "@/assets/images/placeholder.png";
+import { Route } from "@/data/routes";
 
 export const prerender = true;
 
@@ -27,7 +28,7 @@ const fetchedPost = await sanityFetch<BlogPostFull>(
 );
 const post = fetchedPost ?? (slug === EXAMPLE_POST_SLUG ? exampleBlogPostFull : null);
 
-if (!post) return Astro.redirect("/404");
+if (!post) return Astro.redirect(Route.NOT_FOUND);
 
 const formattedDate = new Date(post.publishedAt).toLocaleDateString("pt-BR", {
   day: "numeric",

@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/Icon/IconName";
+import { Route } from "@/data/routes";
 
 export type EcosystemItem = {
   icon: IconName;
@@ -17,7 +18,7 @@ export const ecosystemItems: EcosystemItem[] = [
     description:
       "Mentoria para líderes, recolocação e visibilidade profissional, com metodologia própria.",
     buttonLabel: "Saiba Mais",
-    href: "#",
+    href: Route.MENTORING,
   },
   {
     icon: "book",
@@ -25,7 +26,7 @@ export const ecosystemItems: EcosystemItem[] = [
     title: "B.Barros Academy",
     description: "Formação de mentores e multiplicação da metodologia em projetos corporativos.",
     buttonLabel: "Saiba Mais",
-    href: "#",
+    href: Route.ACADEMY,
   },
   {
     icon: "briefcase",

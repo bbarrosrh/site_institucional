@@ -1,5 +1,7 @@
 ---
+import { Route } from "@/data/routes";
+
 export const prerender = true;
 ---
 
-<meta http-equiv="refresh" content="0;url=/" />
+<meta http-equiv="refresh" content={`0;url=${Route.HOME}`} />

@@ -1,0 +1,26 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import MiniHeroBanner from "@/components/Sections/Shared/MiniHeroBanner/index.astro";
+import CardCarousel from "@/components/Sections/Shared/CardCarousel/index.astro";
+import CoveredTopics from "@/components/Sections/Shared/CoveredTopics/index.astro";
+import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
+
+import { helpSlides } from "@/data/Academy/help";
+import { coveredTopics } from "@/data/Mentoring/coveredTopics";
+
+export const prerender = true;
+---
+
+<Root title="Academy">
+  <MiniHeroBanner
+    icon="livro"
+    title="Formação de mentores e líderes natos"
+    subtitle="Transforme sua experiência em metodologia certificada e leve essa formação para dentro da sua carreira ou empresa."
+  />
+  <CardCarousel title="O que podemos te ensinar" slides={helpSlides} />
+  <CoveredTopics title="O que você vai aprender a aplicar" topics={coveredTopics} />
+  <CallToAction
+    title="Pronto para dar o próximo passo?"
+    subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."
+  />
+</Root>

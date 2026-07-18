@@ -2,13 +2,14 @@
 import Section from "@/components/Layout/Section/index.astro";
 import { CarouselNavButton } from "@/components/CarouselNavButton";
 import Card from "./Card.astro";
-import { coveredTopics } from "@/data/coveredTopics";
+import type { CoveredTopic } from "@/data/Mentoring/coveredTopics";
 
 interface Props {
   title: string;
+  topics: CoveredTopic[];
 }
 
-const { title } = Astro.props;
+const { title, topics } = Astro.props;
 ---
 
 <Section secondary>
@@ -27,7 +28,7 @@ const { title } = Astro.props;
 
       <div class="covered-topics-dots order-2 flex gap-2 lg:order-1">
         {
-          coveredTopics.map((_, index) => (
+          topics.map((_, index) => (
             <button
               type="button"
               aria-label={`Ir para o item ${index + 1}`}
@@ -58,7 +59,7 @@ const { title } = Astro.props;
       <div
         class="covered-topics-track flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none lg:container-pl lg:container-pr lg:scroll-pl [&::-webkit-scrollbar]:hidden"
       >
-        {coveredTopics.map((topic) => <Card topic={topic} />)}
+        {topics.map((topic) => <Card topic={topic} />)}
       </div>
     </div>
   </div>

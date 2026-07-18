@@ -1,3 +1,5 @@
+import { Route } from "@/data/routes";
+
 export type Moment = {
   title: string;
   description: string;
@@ -14,13 +16,13 @@ export const momentsByAudience: Record<Audience, Moment[]> = {
       description:
         "Estou desempregado ou busco uma melhor posição no meio corporativo e preciso de direção.",
       linkLabel: "Mentoria",
-      href: "#",
+      href: Route.MENTORING,
     },
     {
       title: "Já estou bem posicionado, mas quero alcançar outro nível",
       description: "Sou um profissional sênior buscando cargos de liderança e visibilidade.",
       linkLabel: "Programa de Mentoria para Líderes",
-      href: "#",
+      href: Route.MENTORING,
     },
     {
       title: "Tenho experiência técnica e quero empreender",
@@ -33,20 +35,20 @@ export const momentsByAudience: Record<Audience, Moment[]> = {
       title: "Quero me tornar um mentor técnico",
       description: "Já tenho experiência e quero formalizar isso como mentor certificado.",
       linkLabel: "B.Barros Academy",
-      href: "#",
+      href: Route.ACADEMY,
     },
     {
       title: "Estou começando a minha carreira",
       description:
         "Sou universitário ou recém-formado e quero dar o primeiro passo. Preciso de direção em minha carreira.",
       linkLabel: "Mentoria",
-      href: "#",
+      href: Route.MENTORING,
     },
     {
       title: "Quero uma carreira no exterior",
       description: "Busco oportunidades internacionais e quero refinar minha marca pessoal.",
       linkLabel: "Mentoria",
-      href: "#",
+      href: Route.MENTORING,
     },
   ],
   pj: [
@@ -67,7 +69,7 @@ export const momentsByAudience: Record<Audience, Moment[]> = {
       title: "Quero formar líderes dentro da minha empresa",
       description: "Busco um desenvolvimento interno de liderança via projeto corporativo.",
       linkLabel: "B.Barros Academy",
-      href: "#",
+      href: Route.ACADEMY,
     },
     {
       title: "Sou uma empresa em fase inicial",

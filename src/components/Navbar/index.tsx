@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/utils/className";
 import { Button } from "@/components/Button";
 import { navLinks } from "@/data/navbar";
+import { Route } from "@/data/routes";
 import { MobileMenuButton, MobileMenuDropdown } from "./MobileMenu";
 import { ServicesDropdown } from "./ServicesDropdown";
 import logoWhite from "@/assets/images/logo_white.svg";
@@ -34,7 +35,7 @@ export function Navbar({ currentPath }: Props) {
     >
       <div className="section-container">
         <div className="flex justify-between items-center h-16 xl:h-20 transition-all duration-300">
-          <a href="/" aria-label="Página inicial" className="shrink-0">
+          <a href={Route.HOME} aria-label="Página inicial" className="shrink-0">
             <img src={logoWhite.src} alt="Logo" className="h-5 xl:h-7 w-auto drop-shadow-md" />
           </a>
 

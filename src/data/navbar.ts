@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/Icon/IconName";
+import { Route } from "./routes";
 
 export type ServiceMenuItem = {
   icon: IconName;
@@ -14,8 +15,8 @@ export type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
-  { name: "Home", href: "/" },
-  { name: "Sobre Nós", href: "/sobre-nos" },
+  { name: "Home", href: Route.HOME },
+  { name: "Sobre Nós", href: Route.ABOUT },
   {
     name: "Serviços",
     href: "#",
@@ -24,13 +25,13 @@ export const navLinks: NavLink[] = [
         icon: "compass",
         subtitle: "Pessoa Física",
         title: "B.Barros Mentoring",
-        href: "/servicos/mentoria",
+        href: Route.MENTORING,
       },
       {
         icon: "book",
         subtitle: "Formação e Certificação",
         title: "B.Barros Academy",
-        href: "#",
+        href: Route.ACADEMY,
       },
       {
         icon: "briefcase",

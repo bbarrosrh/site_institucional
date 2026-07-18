@@ -1,3 +1,5 @@
+import { Route } from "./routes";
+
 type FooterLink = { title: string; href: string };
 type FooterColumn = { heading: string; links: FooterLink[] };
 
@@ -5,8 +7,8 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: "Navegação",
     links: [
-      { title: "Home", href: "#" },
-      { title: "Sobre Nós", href: "#" },
+      { title: "Home", href: Route.HOME },
+      { title: "Sobre Nós", href: Route.ABOUT },
       { title: "Instituto", href: "#" },
       { title: "Blog", href: "#" },
       { title: "Loja", href: "#" },
@@ -15,8 +17,8 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: "Serviços",
     links: [
-      { title: "B.Barros Mentoring", href: "#" },
-      { title: "B.Barros Academy", href: "#" },
+      { title: "B.Barros Mentoring", href: Route.MENTORING },
+      { title: "B.Barros Academy", href: Route.ACADEMY },
       { title: "B.Barros Business", href: "#" },
     ],
   },
@@ -58,5 +60,5 @@ export const contactInfo = {
 export const legalInfo = {
   company:
     "B. Barros Recursos Humanos LTDA | CNPJ:47.407.395/0001-05 © Todos os direitos reservados.",
-  privacyPolicyHref: "/politica-de-privacidade",
+  privacyPolicyHref: Route.PRIVACY_POLICY,
 };

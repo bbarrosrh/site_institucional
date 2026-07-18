@@ -25,6 +25,10 @@ import {
   IconUserFilled,
   IconDiamondFilled,
   IconSeedlingFilled,
+  IconFlareFilled,
+  IconAwardFilled,
+  IconWorldFilled,
+  IconSunHighFilled,
 } from "@tabler/icons-react";
 import { IconCompassCustom, IconInstituteCustom } from "./CustomIcons";
 
@@ -57,6 +61,10 @@ export const iconMap = {
   "user-filled": IconUserFilled,
   "diamond-filled": IconDiamondFilled,
   "seedling-filled": IconSeedlingFilled,
+  "flare-filled": IconFlareFilled,
+  "award-filled": IconAwardFilled,
+  "world-filled": IconWorldFilled,
+  "sun-high-filled": IconSunHighFilled,
 } as const;
 
 export type IconName = keyof typeof iconMap;
