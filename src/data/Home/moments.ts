@@ -75,7 +75,7 @@ export const momentsByAudience: Record<Audience, Moment[]> = {
       title: "Sou uma empresa em fase inicial",
       description: "Pretendo construir propósito, identidade e entrada estratégica no mercado.",
       linkLabel: "B.Barros Business",
-      href: "#",
+      href: Route.BUSINESS,
     },
   ],
 };

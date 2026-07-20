@@ -1,0 +1,28 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import MiniHeroBanner from "@/components/Sections/Shared/MiniHeroBanner/index.astro";
+import CardCarousel from "@/components/Sections/Shared/CardCarousel/index.astro";
+import Methodology from "@/components/Sections/Business/Methodology.astro";
+import People from "@/components/Sections/Shared/People/index.astro";
+import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
+
+import { helpSlides } from "@/data/Business/help";
+import { partners } from "@/data/Business/partners";
+
+export const prerender = true;
+---
+
+<Root title="Business">
+  <MiniHeroBanner
+    icon="maleta"
+    title="Estruture sua empresa para escalar na direção certa"
+    subtitle="Usamos metodologias que integram Psicologia Organizacional, RH Estratégico, Branding e Excelência Operacional, para empresas em qualquer fase."
+  />
+  <CardCarousel title="Como podemos te ajudar" slides={helpSlides} />
+  <Methodology />
+  <People title="Conheça nossos parceiros" people={partners} />
+  <CallToAction
+    title="Pronto para dar o próximo passo?"
+    subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."
+  />
+</Root>

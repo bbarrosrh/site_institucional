@@ -19,7 +19,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { title: "B.Barros Mentoring", href: Route.MENTORING },
       { title: "B.Barros Academy", href: Route.ACADEMY },
-      { title: "B.Barros Business", href: "#" },
+      { title: "B.Barros Business", href: Route.BUSINESS },
     ],
   },
 ];

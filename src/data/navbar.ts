@@ -37,7 +37,7 @@ export const navLinks: NavLink[] = [
         icon: "briefcase",
         subtitle: "Pessoa Jurídica",
         title: "B.Barros Business",
-        href: "#",
+        href: Route.BUSINESS,
       },
     ],
   },

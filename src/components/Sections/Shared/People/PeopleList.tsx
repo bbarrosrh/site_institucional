@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { cn } from "@/utils/className";
-import type { Mentor } from "@/data/mentors";
+import type { Person } from "@/data/mentors";
 
 interface Props {
-  mentors: Mentor[];
+  people: Person[];
 }
 
-export function MentorsList({ mentors }: Props) {
+export function PeopleList({ people }: Props) {
   const [selected, setSelected] = useState(0);
-  const featured = mentors[selected];
+  const featured = people[selected];
 
   return (
     <div className="grid gap-3 lg:gap-6 lg:grid-cols-3">
@@ -23,30 +23,30 @@ export function MentorsList({ mentors }: Props) {
 
         <div className="flex flex-1 flex-col justify-between gap-8 rounded-lg bg-tertiary p-3.5 lg:p-6 lg:rounded-2xl">
           <div className="grid">
-            {mentors.map((mentor, index) => (
+            {people.map((person, index) => (
               <p
-                key={mentor.name}
+                key={person.name}
                 className={cn(
                   "col-start-1 row-start-1 leading-relaxed text-white/85 max-lg:text-sm",
                   index === selected ? "visible" : "invisible"
                 )}
               >
-                {mentor.bio}
+                {person.bio}
               </p>
             ))}
           </div>
 
           <div className="flex flex-col-reverse items-start gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
             <div className="grid flex-1">
-              {mentors.map((mentor, index) => (
+              {people.map((person, index) => (
                 <p
-                  key={mentor.name}
+                  key={person.name}
                   className={cn(
                     "col-start-1 row-start-1 text-sm text-white/70",
                     index === selected ? "visible" : "invisible"
                   )}
                 >
-                  {mentor.age} anos &bull; {mentor.location} &bull; {mentor.education}
+                  {person.age} anos &bull; {person.location} &bull; {person.education}
                 </p>
               ))}
             </div>
@@ -63,14 +63,14 @@ export function MentorsList({ mentors }: Props) {
         </div>
       </div>
 
-      <div className="max-h-30 overflow-hidden rounded-lg bg-tertiary lg:max-h-110 lg:rounded-2xl">
+      <div className="max-h-30 overflow-hidden rounded-lg bg-tertiary lg:max-h-110 lg:rounded-2xl lg:min-h-120">
         <div className="scrollbar-mini flex h-full flex-row gap-3 overflow-x-auto p-3 lg:flex-col lg:gap-2 lg:overflow-x-hidden lg:overflow-y-auto">
-          {mentors.map((mentor, index) => {
+          {people.map((person, index) => {
             const isActive = index === selected;
 
             return (
               <button
-                key={mentor.name}
+                key={person.name}
                 type="button"
                 onClick={() => setSelected(index)}
                 className={cn(
@@ -83,9 +83,9 @@ export function MentorsList({ mentors }: Props) {
                   <span
                     className={cn("font-heading text-lg", isActive ? "text-primary" : "text-white")}
                   >
-                    {mentor.name}
+                    {person.name}
                   </span>
-                  <span className="text-sm text-white/60">{mentor.specialty}</span>
+                  <span className="text-sm text-white/60">{person.specialty}</span>
                 </span>
               </button>
             );

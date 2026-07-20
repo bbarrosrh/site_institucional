@@ -35,6 +35,6 @@ export const ecosystemItems: EcosystemItem[] = [
     description:
       "Do primeiro passo à visibilidade de mercado, em três pilares de desenvolvimento empresarial.",
     buttonLabel: "Saiba Mais",
-    href: "#",
+    href: Route.BUSINESS,
   },
 ];

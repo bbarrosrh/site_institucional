@@ -2,16 +2,16 @@
 import Root from "@/components/Layout/Root.astro";
 import MiniHeroBanner from "@/components/Sections/Shared/MiniHeroBanner/index.astro";
 import CardCarousel from "@/components/Sections/Shared/CardCarousel/index.astro";
-import Methodologies from "@/components/Sections/Mentoria/Methodologies.astro";
-import DevelopedSkills from "@/components/Sections/Mentoria/DevelopedSkills/index.astro";
+import Methodologies from "@/components/Sections/Mentoring/Methodologies.astro";
+import DevelopedSkills from "@/components/Sections/Mentoring/DevelopedSkills/index.astro";
 import CoveredTopics from "@/components/Sections/Shared/CoveredTopics/index.astro";
-import Mentors from "@/components/Sections/Shared/Mentors/index.astro";
+import People from "@/components/Sections/Shared/People/index.astro";
 import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
 
 import { helpSlides } from "@/data/Mentoring/help";
 import { coveredTopics } from "@/data/Mentoring/coveredTopics";
 import { talentBankSubject } from "@/data/contact";
-import homemVitruviano from "@/assets/images/Mentoria/homem_vitruviano.png";
+import homemVitruviano from "@/assets/images/Mentoring/homem_vitruviano.png";
 
 export const prerender = true;
 ---
@@ -34,7 +34,7 @@ export const prerender = true;
     contactSubject={talentBankSubject}
     noFade
   />
-  <Mentors />
+  <People title="Conheça nossa rede de mentores" />
   <CallToAction
     title="Pronto para dar o próximo passo?"
     subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."

@@ -1,0 +1,63 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { Card } from "@/components/Card";
+import { methodologyPillars } from "@/data/Business/methodology";
+import maoBaixo from "@/assets/images/Business/mao_baixo.svg";
+import maoCima from "@/assets/images/Business/mao_cima.svg";
+
+const [firstHalf, secondHalf] = [methodologyPillars.slice(0, 4), methodologyPillars.slice(4, 8)];
+---
+
+<Section secondary>
+  <h2 class="section-title">O que nossa metodologia te ensina</h2>
+
+  <div class="flex w-full flex-col gap-3">
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-stretch">
+      <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:w-1/2">
+        {
+          firstHalf.map((pillar, index) => (
+            <Card
+              badge={String(index + 1).padStart(2, "0")}
+              title={pillar.title}
+              description={pillar.description}
+            />
+          ))
+        }
+      </div>
+
+      <div
+        class="relative hidden h-auto min-h-64 w-full overflow-hidden rounded-2xl bg-black p-8 lg:block lg:w-1/2"
+      >
+        <img
+          src={maoCima.src}
+          alt=""
+          class="absolute inset-0 size-full origin-left object-contain object-left scale-180 -translate-y-15"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-stretch">
+      <div
+        class="relative hidden h-auto min-h-64 w-full overflow-hidden rounded-2xl bg-black p-8 lg:block lg:w-1/2"
+      >
+        <img
+          src={maoBaixo.src}
+          alt=""
+          class="absolute inset-0 size-full origin-right object-contain object-right translate-y-45 scale-180"
+        />
+      </div>
+
+      <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:w-1/2">
+        {
+          secondHalf.map((pillar, index) => (
+            <Card
+              badge={String(index + 5).padStart(2, "0")}
+              title={pillar.title}
+              description={pillar.description}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,4 +1,4 @@
-export interface Mentor {
+export interface Person {
   name: string;
   specialty: string;
   bio: string;
@@ -8,7 +8,7 @@ export interface Mentor {
   linkedinHref: string;
 }
 
-export const mentors: Mentor[] = [
+export const mentors: Person[] = [
   {
     name: "Joãozinho da Silva",
     specialty: "Engenharia mecânica",

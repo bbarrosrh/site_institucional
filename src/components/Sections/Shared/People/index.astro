@@ -1,0 +1,19 @@
+---
+import { PeopleList } from "@/components/Sections/Shared/People/PeopleList";
+import { mentors, type Person } from "@/data/mentors";
+
+interface Props {
+  title: string;
+  people?: Person[];
+}
+
+const { title, people = mentors } = Astro.props;
+---
+
+<section class="section-wrapper bg-black text-white">
+  <div class="section-container flex flex-col gap-8 lg:gap-12">
+    <h2 class="section-title font-heading">{title}</h2>
+
+    <PeopleList people={people} client:load />
+  </div>
+</section>

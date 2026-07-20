@@ -1,7 +1,7 @@
 import type { ImageMetadata } from "astro";
-import cardRoleplay from "@/assets/images/Mentoria/card-roleplay.jpeg";
-import cardEstrategia from "@/assets/images/Mentoria/card-estrategia.jpg";
-import cardFerramenta from "@/assets/images/Mentoria/card-ferramenta.jpg";
+import cardRoleplay from "@/assets/images/Mentoring/card-roleplay.jpeg";
+import cardEstrategia from "@/assets/images/Mentoring/card-estrategia.jpg";
+import cardFerramenta from "@/assets/images/Mentoring/card-ferramenta.jpg";
 
 export interface CoveredTopic {
   title: string;

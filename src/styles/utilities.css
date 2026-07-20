@@ -21,7 +21,7 @@
 }
 
 @utility section-container {
-  @apply max-w-400 mx-auto px-(--container-px);
+  @apply max-w-7xl 2xl:max-w-400 mx-auto px-(--container-px);
 }
 
 /* Section */
