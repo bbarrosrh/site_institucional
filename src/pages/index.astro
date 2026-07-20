@@ -9,7 +9,8 @@ import Differentials from "@/components/Sections/Home/Differentials/index.astro"
 import Testimonials from "@/components/Sections/Home/Testimonials/index.astro";
 import Faq from "@/components/Sections/Home/Faq/index.astro";
 import BlogSection from "@/components/Sections/Home/Blog/index.astro";
-import Contact from "@/components/Sections/Home/Contact/index.astro";
+import Contact from "@/components/Sections/Shared/Contact.astro";
+import adao from "@/assets/images/Home/adao.png";
 
 export const prerender = true;
 ---
@@ -24,5 +25,5 @@ export const prerender = true;
   <Testimonials />
   <Faq />
   <BlogSection />
-  <Contact />
+  <Contact image={adao} />
 </Root>

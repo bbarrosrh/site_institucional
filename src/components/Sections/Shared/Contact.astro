@@ -1,17 +1,24 @@
 ---
 import ContactForm from "@/components/Sections/Shared/ContactForm/index.astro";
-import homemVitruviano from "@/assets/images/Home/adao.png";
+
+interface Props {
+  image: ImageMetadata;
+  subjectLabel?: string;
+  subjectOptions?: string[];
+}
+
+const { image, subjectLabel, subjectOptions } = Astro.props;
 ---
 
 <section id="contato" class="section-wrapper bg-black text-white">
   <div class="section-container">
     <div class="grid overflow-hidden rounded-xl sm:rounded-3xl bg-tertiary lg:grid-cols-2">
       <div class="p-2 sm:p-8 lg:p-12">
-        <ContactForm />
+        <ContactForm subjectLabel={subjectLabel} subjectOptions={subjectOptions} />
       </div>
 
       <div class="relative hidden lg:block">
-        <img src={homemVitruviano.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+        <img src={image.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
       </div>
     </div>
   </div>

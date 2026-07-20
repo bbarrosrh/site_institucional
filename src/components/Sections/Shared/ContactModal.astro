@@ -1,6 +1,10 @@
 ---
 import ContactForm from "@/components/Sections/Shared/ContactForm/index.astro";
 import { Icon } from "@/components/Icon";
+import { Route } from "@/data/routes";
+import { participateItems } from "@/data/Institute/participate";
+
+const isInstitutePage = Astro.url.pathname === Route.INSTITUTE;
 ---
 
 <div
@@ -24,7 +28,10 @@ import { Icon } from "@/components/Icon";
     </button>
 
     <div class="scrollbar-mini h-full overflow-y-auto p-2 sm:p-8">
-      <ContactForm />
+      <ContactForm
+        subjectLabel={isInstitutePage ? "Tenho interesse em" : undefined}
+        subjectOptions={isInstitutePage ? participateItems.map((item) => item.title) : undefined}
+      />
     </div>
   </div>
 </div>

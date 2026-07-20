@@ -9,7 +9,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { title: "Home", href: Route.HOME },
       { title: "Sobre Nós", href: Route.ABOUT },
-      { title: "Instituto", href: "#" },
+      { title: "Instituto", href: Route.INSTITUTE },
       { title: "Blog", href: "#" },
       { title: "Loja", href: "#" },
     ],

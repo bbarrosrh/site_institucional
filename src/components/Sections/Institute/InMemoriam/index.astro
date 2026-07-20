@@ -1,0 +1,20 @@
+---
+import adao from "@/assets/images/adao.png";
+import FollowCompass from "./FollowCompass.astro";
+---
+
+<section class="relative overflow-hidden bg-black text-white">
+  <img src={adao.src} alt="" class="absolute inset-0 h-full w-full object-cover object-center" />
+  <div class="absolute inset-0 bg-linear-to-b from-black/50 to-black"></div>
+
+  <div
+    class="section-container relative flex flex-col items-center gap-12 py-20 text-center lg:py-32"
+  >
+    <p class="font-caveat text-2xl text-white sm:text-3xl">Em memória a Eronides Barros</p>
+    <h2 class="font-heading font-light text-4xl text-white sm:text-7xl -mt-6">
+      Sua história inspira o nosso futuro.
+    </h2>
+
+    <FollowCompass class="size-16" />
+  </div>
+</section>

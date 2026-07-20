@@ -1,19 +1,23 @@
 import type { ReactNode } from "react";
 import { Icon } from "@/components/Icon";
+import type { IconName } from "@/components/Icon/IconName";
+import { cn } from "@/utils/className";
 
 interface Props {
-  badge: ReactNode;
+  badge?: ReactNode;
+  icon?: IconName;
   title: string;
   description: string;
   linkLabel?: string;
   href?: string;
+  className?: string;
 }
 
-export function Card({ badge, title, description, linkLabel, href }: Props) {
+export function Card({ badge, icon, title, description, linkLabel, href, className }: Props) {
   return (
-    <div className="flex flex-col gap-3 rounded-2xl bg-black p-6">
+    <div className={cn("flex flex-col gap-3 rounded-2xl bg-black p-6", className)}>
       <span className="font-extrabold inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-black">
-        {badge}
+        {icon ? <Icon name={icon} size={20} /> : badge}
       </span>
 
       <div>

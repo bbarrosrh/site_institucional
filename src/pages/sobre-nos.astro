@@ -2,7 +2,8 @@
 import Root from "@/components/Layout/Root.astro";
 import Banner from "@/components/Layout/Banner.astro";
 import Introduction from "@/components/Sections/About/Introduction.astro";
-import Mission from "@/components/Sections/About/Mission.astro";
+import Mission from "@/components/Sections/Shared/Mission.astro";
+import atenas from "@/assets/images/About/atenas.png";
 import Programs from "@/components/Sections/About/Programs/index.astro";
 import Recognitions from "@/components/Sections/About/Recognitions/index.astro";
 import People from "@/components/Sections/Shared/People/index.astro";
@@ -15,7 +16,10 @@ export const prerender = true;
 <Root title="Sobre Nós">
   <Banner eyebrow="Sobre Nós" title="Conheça a nossa história" />
   <Introduction />
-  <Mission />
+  <Mission
+    mission="Revelar a essência dos profissionais e transformá-los em líderes preparados para o futuro do trabalho."
+    image={atenas}
+  />
   <Programs />
   <People title="Conheça nossa rede de mentores" />
   <Recognitions />

@@ -32,7 +32,7 @@ export function Button({
   };
 
   const classes = cn(
-    "inline-flex items-center justify-center",
+    "inline-flex items-center justify-center max-sm:w-full",
     "font-semibold cursor-pointer",
     variantClasses[variant],
     sizeClasses[size],

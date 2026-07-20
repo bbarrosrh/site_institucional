@@ -13,22 +13,26 @@ interface Props {
 const { icon, title, subtitle } = Astro.props;
 
 const eyebrows: Record<MiniHeroIcon, string> = {
-  bussola: "B.Barros Mentoring",
-  livro: "B.Barros Academy",
-  maleta: "B.Barros Business",
+  compass: "B.Barros Mentoring",
+  book: "B.Barros Academy",
+  briefcase: "B.Barros Business",
+  institute: "Instituto B.Barros",
 };
 
 const eyebrowIcons: Record<MiniHeroIcon, IconName> = {
-  bussola: "compass",
-  livro: "book",
-  maleta: "briefcase",
+  compass: "compass",
+  book: "book",
+  briefcase: "briefcase",
+  institute: "institute",
 };
 
 const eyebrow = eyebrows[icon];
 const eyebrowIcon = eyebrowIcons[icon];
 ---
 
-<section class="relative flex h-[57dvh] lg:h-[70dvh] items-end overflow-hidden bg-black pt-24 pb-12 text-white">
+<section
+  class="relative flex h-dvh lg:h-[70dvh] items-center lg:items-end overflow-hidden bg-black pt-24 pb-12 text-white"
+>
   <div class="bg-grid pointer-events-none absolute inset-0"></div>
 
   <div class="section-container relative grid items-end gap-10 lg:grid-cols-2">
@@ -51,12 +55,10 @@ const eyebrowIcon = eyebrowIcons[icon];
       </div>
       <p class="w-4/5 leading-relaxed text-white sm:text-xl">{subtitle}</p>
 
-      <div>
         <Button variant="secondary" size="lg" contactCta>
           Agende uma conversa
           <Icon name="arrow-right" />
         </Button>
-      </div>
     </div>
 
     <div class="hidden justify-center lg:flex lg:justify-end">

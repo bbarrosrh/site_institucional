@@ -5,6 +5,18 @@ import { Icon } from "@/components/Icon";
 import { Listbox } from "./Listbox";
 import { contactSubjects } from "@/data/contact";
 
+interface Props {
+  subjectLabel?: string;
+  subjectOptions?: string[];
+  subjectPlaceholder?: string;
+}
+
+const {
+  subjectLabel = "Assunto",
+  subjectOptions = contactSubjects,
+  subjectPlaceholder = "Selecione um assunto",
+} = Astro.props;
+
 const inputClass =
   "w-full rounded-lg border border-white/10 bg-black px-4 py-3 text-white placeholder:text-white/40 focus:border-primary focus:outline-none";
 
@@ -54,13 +66,13 @@ const fid = (base: string) => `${base}-${uid}`;
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for={fid("contact-subject")} class="text-sm text-white/80"> Assunto </label>
+      <label for={fid("contact-subject")} class="text-sm text-white/80"> {subjectLabel} </label>
       <Listbox
         client:load
         id={fid("contact-subject")}
         name="subject"
-        options={contactSubjects}
-        placeholder="Selecione um assunto"
+        options={subjectOptions}
+        placeholder={subjectPlaceholder}
       />
       <p class="subject-error hidden text-sm text-red-400">Selecione um assunto.</p>
     </div>

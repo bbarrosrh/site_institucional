@@ -1,0 +1,39 @@
+---
+import DuoSection from "@/components/Layout/Section/Duo.astro";
+import mosaico from "@/assets/images/Institute/mosaico.png";
+---
+
+<DuoSection sectionClass="bg-black text-white max-lg:pb-0">
+  <div slot="left" class="flex flex-col gap-6 text-center lg:text-left">
+    <div class="flex flex-col gap-1 border-secondary lg:border-l-8 lg:pl-5">
+      <h2 class="font-heading text-2xl sm:text-5xl font-semibold text-primary">
+        Onde tudo começou
+      </h2>
+    </div>
+
+    <p class="leading-relaxed text-white sm:text-xl">
+      Nossa história começou muito antes da fundação da B.Barros. Ela começou com um homem chamado
+      Eronides Barros, conhecido carinhosamente como Xuxa.
+    </p>
+
+    <p class="leading-relaxed text-white sm:text-xl">
+      Um trabalhador que dedicou a vida à defesa da dignidade, do respeito e dos direitos das
+      pessoas nas relações de trabalho. Foi líder em movimentos ligados ao trabalho e aos
+      aposentados e acreditava que o trabalho deveria ser instrumento de crescimento, e não de
+      opressão.
+    </p>
+
+    <p class="leading-relaxed text-white sm:text-xl">
+      Seu legado ultrapassou a própria trajetória profissional e se transformou na essência daquilo
+      que hoje chamamos de B.Barros.
+    </p>
+  </div>
+
+  <div slot="right">
+    <img
+      src={mosaico.src}
+      alt="Mosaico de fotos de Eronides Barros"
+      class="w-auto mx-auto mb-12 object-cover lg:h-full lg:rounded-3xl lg:aspect-auto"
+    />
+  </div>
+</DuoSection>

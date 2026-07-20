@@ -4,6 +4,7 @@ export const Route = {
   MENTORING: "/servicos/mentoria",
   ACADEMY: "/servicos/academy",
   BUSINESS: "/servicos/business",
+  INSTITUTE: "/instituto",
   PRIVACY_POLICY: "/politica-de-privacidade",
   NOT_FOUND: "/404",
   blogPost: (slug: string) => `/blog/${slug}`,

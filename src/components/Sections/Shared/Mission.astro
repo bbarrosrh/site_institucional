@@ -1,6 +1,12 @@
 ---
 import { Icon } from "@/components/Icon";
-import atenas from "@/assets/images/About/atenas.png";
+
+interface Props {
+  mission: string;
+  image: ImageMetadata;
+}
+
+const { mission, image } = Astro.props;
 ---
 
 <section class="relative overflow-hidden bg-secondary text-white">
@@ -10,24 +16,19 @@ import atenas from "@/assets/images/About/atenas.png";
     <div
       class="container-pl 2xl:pl-0 flex flex-col gap-5 pr-(--container-px) py-16 text-center sm:py-20 lg:py-24 lg:pr-16 lg:text-left"
     >
-      <div class="flex flex-col gap-3 border-primary lg:border-l-4 lg:pl-4 xl:border-l-8 xl:pl-5">
+      <div class="flex flex-col gap-3 border-primary lg:border-l-4 lg:pl-4 xl:border-l-8 xl:pl-8">
         <p class="font-caveat text-2xl text-white sm:text-3xl">Nossa missão</p>
         <p class="font-heading text-xl font-semibold leading-snug sm:text-4xl">
-          Revelar a essência dos profissionais e transformá-los em líderes preparados para o futuro
-          do trabalho.
+          {mission}
         </p>
-        <div class="flex justify-center gap-1 text-white lg:justify-start">
+        <div class="flex justify-center mt-4 gap-2 text-white lg:justify-start">
           {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} />)}
         </div>
       </div>
     </div>
 
     <div class="relative aspect-square ml-auto">
-      <img
-        src={atenas.src}
-        alt="Pintura Escola de Atenas"
-        class="absolute inset-0 h-full w-full object-cover"
-      />
+      <img src={image.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
     </div>
   </div>
 </section>

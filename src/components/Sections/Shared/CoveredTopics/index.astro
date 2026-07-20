@@ -118,8 +118,8 @@ const { title, topics } = Astro.props;
     };
 
     const goToStop = (index: number) => {
-      const clamped = Math.max(0, Math.min(index, stops.length - 1));
-      track.scrollTo({ left: stops[clamped], behavior: "smooth" });
+      const wrapped = ((index % stops.length) + stops.length) % stops.length;
+      track.scrollTo({ left: stops[wrapped], behavior: "smooth" });
     };
 
     const update = () => {
@@ -129,9 +129,6 @@ const { title, topics } = Astro.props;
         dot.classList.toggle("bg-primary", dotIndex === index);
         dot.classList.toggle("bg-primary/25", dotIndex !== index);
       });
-
-      prevButton.disabled = index <= 0;
-      nextButton.disabled = index >= stops.length - 1;
     };
 
     prevButton.addEventListener("click", () => goToStop(activeStopIndex() - 1));

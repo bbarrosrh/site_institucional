@@ -1,0 +1,32 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { Card } from "@/components/Card";
+import { Icon } from "@/components/Icon";
+import { whatWeDoItems, whatWeDoHighlight } from "@/data/Institute/whatWeDo";
+---
+
+<Section>
+  <h2 class="section-title">O que fazemos pela sociedade</h2>
+
+  <div class="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      class="order-last flex flex-col items-center justify-center gap-4 rounded-2xl bg-secondary p-8 text-center sm:col-span-2 lg:order-0 lg:col-start-3 lg:row-start-2 lg:row-span-2"
+    >
+      <Icon name="heart-filled" size={36} className="text-white" />
+      <p class="font-heading text-xl font-semibold leading-snug text-white sm:text-2xl">
+        {whatWeDoHighlight}
+      </p>
+    </div>
+
+    {
+      whatWeDoItems.map((item) => (
+        <Card
+          icon={item.icon}
+          title={item.title}
+          description={item.description}
+          className="bg-tertiary"
+        />
+      ))
+    }
+  </div>
+</Section>

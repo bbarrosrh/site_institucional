@@ -1,0 +1,36 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import MiniHeroBanner from "@/components/Sections/Shared/MiniHeroBanner/index.astro";
+import History from "@/components/Sections/Institute/History.astro";
+import InMemoriam from "@/components/Sections/Institute/InMemoriam/index.astro";
+import Mission from "@/components/Sections/Shared/Mission.astro";
+import WhatWeDo from "@/components/Sections/Institute/WhatWeDo.astro";
+import HowToParticipate from "@/components/Sections/Institute/HowToParticipate/index.astro";
+import Contact from "@/components/Sections/Shared/Contact.astro";
+import brunaLivro from "@/assets/images/Institute/bruna_livro.png";
+import { participateItems } from "@/data/Institute/participate";
+import adao from "@/assets/images/Home/adao.png";
+
+export const prerender = true;
+---
+
+<Root title="Instituto">
+  <MiniHeroBanner
+    icon="institute"
+    title="Transformando histórias e perpetuando um legado"
+    subtitle="Democratizamos o acesso ao desenvolvimento humano com mentorias pro bono, liderança e empregabilidade, oferecendo capacitação e oportunidade a quem o mercado normalmente exclui."
+  />
+  <History />
+  <Mission
+    mission="Democratizar o acesso ao desenvolvimento humano e criar oportunidades onde antes existiam barreiras."
+    image={brunaLivro}
+  />
+  <WhatWeDo />
+  <HowToParticipate />
+  <InMemoriam />
+  <Contact
+    image={adao}
+    subjectLabel="Tenho interesse em"
+    subjectOptions={participateItems.map((item) => item.title)}
+  />
+</Root>
