@@ -28,6 +28,8 @@ export function Card({ badge, icon, title, description, linkLabel, href, classNa
       {linkLabel && href && (
         <a
           href={href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group mt-auto inline-flex w-fit items-center gap-1 pt-3 text-sm font-semibold text-white hover:text-primary"
         >
           {linkLabel}

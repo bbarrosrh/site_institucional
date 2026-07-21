@@ -14,15 +14,15 @@ export const differentials: Differential[] = [
     title: "Atuação nacional e internacional",
   },
   {
-    title: "Framework Lean Six Sigma",
-    description: "Aumentar a eficiência e qualidade",
+    title: "Roleplay corporativo",
+    description: "Pratique antes do processo real",
   },
   {
     title: "Rede de mentores qualificados",
     description: "Certificados pela B.Barros Academy",
   },
   {
-    title: "Desenvolvimento de Skills",
+    title: "Desenvolvimento de skills",
     description: "Soft, Hard, Green e Brain",
   },
   {

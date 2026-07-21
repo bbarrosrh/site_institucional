@@ -4,6 +4,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "outline";
   href?: string;
+  target?: string;
   contactCta?: boolean;
   contactSubject?: string;
 }
@@ -15,6 +16,7 @@ export function Button({
   className,
   children,
   href,
+  target,
   contactCta,
   contactSubject,
   ...props
@@ -43,6 +45,8 @@ export function Button({
     return (
       <a
         href={href}
+        target={target}
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
         className={classes}
         data-contact-cta={contactCta ? "true" : undefined}
         data-contact-subject={contactSubject}

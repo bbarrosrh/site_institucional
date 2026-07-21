@@ -16,6 +16,11 @@ validar que o código compila.
 
 ## Estrutura de pastas
 
+Nomes de pasta (`components/Sections/<Página>/`, `data/<Página>/`, `assets/images/<Página>/`,
+`sanity/schemas/<Nome>/`) são **sempre em inglês**, mesmo em páginas cujo conteúdo é em português
+(ex.: `Sections/Home/`, não `Sections/Inicio/`; `sanity/schemas/Testimonials/`, não
+`schemas/Depoimentos/`).
+
 ```
 src/
 ├── components/
@@ -92,7 +97,8 @@ precisa ser extraído para `data/`.
 
 ## Convenção do Sanity
 
-Cada tipo de conteúdo tem sua pasta em `src/sanity/schemas/<Nome>/`:
+Cada tipo de conteúdo tem sua pasta em `src/sanity/schemas/<Nome>/` (`<Nome>` em inglês, ver
+[Estrutura de pastas](#estrutura-de-pastas)):
 
 - `index.ts` — `defineType`/`defineField` do schema (registrado em [sanity.config.ts](sanity.config.ts))
 - `data.ts` — tipos TS do conteúdo + queries GROQ (consumidos pelo lado Astro)

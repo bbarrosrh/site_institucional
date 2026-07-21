@@ -52,7 +52,7 @@ export function ServicesDropdown({ link, currentPath, className }: Props) {
 
       <div
         className={cn(
-          "absolute left-1/2 top-full mt-4 w-80 origin-top -translate-x-1/2 rounded-2xl bg-tertiary p-3 shadow-xl",
+          "absolute left-1/2 top-full mt-4 w-80 origin-top -translate-x-1/2 rounded-2xl bg-tertiary p-3 shadow-2xl shadow-black/50",
           "transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
           isOpen ? "scale-100 opacity-100" : "pointer-events-none scale-85 opacity-0"
         )}

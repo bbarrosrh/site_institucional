@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import bruna from "@/assets/images/Home/bruna.png";
 import { achievements } from "@/data/Home/achievements";
+import { Route } from "@/data/routes";
 ---
 
 <DuoSection sectionClass="bg-black text-white" leftClass="lg:w-2/3">
@@ -40,10 +41,10 @@ import { achievements } from "@/data/Home/achievements";
       }
     </div>
 
-      <Button variant="outline">
-        Conheça-nos melhor
-        <Icon name="arrow-right" />
-      </Button>
+    <Button variant="outline" href={Route.ABOUT} target="_blank">
+      Conheça-nos melhor
+      <Icon name="arrow-right" />
+    </Button>
   </div>
 
   <div slot="right" class="relative ml-auto hidden w-full max-w-md lg:block">

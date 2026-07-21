@@ -3,12 +3,14 @@ import Section from "@/components/Layout/Section/index.astro";
 import { Button } from "@/components/Button";
 import { CarouselNavButton } from "@/components/CarouselNavButton";
 import TestimonialCard from "./TestimonialCard.astro";
-import { testimonials } from "@/data/Home/testimonials";
+import { sanityFetch } from "@/sanity/client";
+import { TESTIMONIALS_QUERY, type Testimonial } from "@/sanity/schemas/Testimonials/data";
 
 const COLUMN_COUNT = 3;
 const VISIBLE_ROWS = 2;
 const VISIBLE_COUNT = COLUMN_COUNT * VISIBLE_ROWS;
 
+const testimonials = (await sanityFetch<Testimonial[]>(TESTIMONIALS_QUERY)) ?? [];
 const hasMore = testimonials.length > VISIBLE_COUNT;
 ---
 
@@ -18,87 +20,78 @@ const hasMore = testimonials.length > VISIBLE_COUNT;
     <h2 class="section-title">Histórias reais de quem já virou a chave</h2>
   </div>
 
-  <div class="testimonials-block w-full flex flex-col gap-6 lg:hidden">
-    <div
-      class="testimonials-track flex gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden"
-    >
-      {
-        testimonials.map((testimonial) => (
-          <div class="w-full min-w-0 shrink-0 snap-start">
-            <TestimonialCard
-              name={testimonial.name}
-              role={testimonial.role}
-              quote={testimonial.quote}
+  {
+    testimonials.length > 0 && (
+      <>
+        <div class="testimonials-block w-full flex flex-col gap-6 lg:hidden">
+          <div class="testimonials-track flex gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden">
+            {testimonials.map((testimonial) => (
+              <div class="w-full min-w-0 shrink-0 snap-start">
+                <TestimonialCard
+                  name={testimonial.name}
+                  role={testimonial.role}
+                  quote={testimonial.quote}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div class="flex items-center justify-between gap-6">
+            <CarouselNavButton
+              client:load
+              direction="prev"
+              label="Anterior"
+              className="testimonials-prev"
+            />
+
+            <div class="h-2 w-full overflow-hidden rounded-full bg-white/10">
+              <div class="testimonials-progress h-full w-1/2 rounded-full bg-primary transition-[width] duration-300 ease-out" />
+            </div>
+
+            <CarouselNavButton
+              client:load
+              direction="next"
+              label="Próximo"
+              className="testimonials-next"
             />
           </div>
-        ))
-      }
-    </div>
-
-    <div class="flex items-center justify-between gap-6">
-      <CarouselNavButton
-        client:load
-        direction="prev"
-        label="Anterior"
-        className="testimonials-prev"
-      />
-
-      <div class="h-2 w-full overflow-hidden rounded-full bg-white/10">
-        <div
-          class="testimonials-progress h-full w-1/2 rounded-full bg-primary transition-[width] duration-300 ease-out"
-        >
         </div>
-      </div>
 
-      <CarouselNavButton
-        client:load
-        direction="next"
-        label="Próximo"
-        className="testimonials-next"
-      />
-    </div>
-  </div>
-
-  <div class="testimonials-block hidden w-full lg:flex lg:flex-col lg:gap-8">
-    <div class="relative w-full">
-      <div
-        class="testimonials-grid grid grid-cols-3 gap-6 transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-      >
-        {
-          testimonials.map((testimonial) => (
-            <div class="testimonial-item">
-              <TestimonialCard
-                name={testimonial.name}
-                role={testimonial.role}
-                quote={testimonial.quote}
-              />
+        <div class="testimonials-block hidden w-full lg:flex lg:flex-col lg:gap-8">
+          <div class="relative w-full">
+            <div class="testimonials-grid grid grid-cols-3 gap-6 transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+              {testimonials.map((testimonial) => (
+                <div class="testimonial-item">
+                  <TestimonialCard
+                    name={testimonial.name}
+                    role={testimonial.role}
+                    quote={testimonial.quote}
+                  />
+                </div>
+              ))}
             </div>
-          ))
-        }
-      </div>
 
-      {
-        hasMore && (
-          <div class="testimonials-fade pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-linear-to-b from-transparent to-black" />
-        )
-      }
-    </div>
+            {hasMore && (
+              <div class="testimonials-fade pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-linear-to-b from-transparent to-black" />
+            )}
+          </div>
 
-    {
-      hasMore && (
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="testimonials-more self-center"
-          data-visible-count={VISIBLE_COUNT}
-          data-column-count={COLUMN_COUNT}
-        >
-          Ver mais
-        </Button>
-      )
-    }
-  </div>
+          {hasMore && (
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              className="testimonials-more self-center"
+              data-visible-count={VISIBLE_COUNT}
+              data-column-count={COLUMN_COUNT}
+            >
+              Ver mais
+            </Button>
+          )}
+        </div>
+      </>
+    )
+  }
 </Section>
 
 <script>

@@ -15,6 +15,7 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [isDisabled, setIsDisabled] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,6 +33,23 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
   }, [options]);
 
   useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const handleSetDisabled = (event: Event) => {
+      const disabled = (event as CustomEvent<boolean>).detail;
+      setIsDisabled(disabled);
+      if (disabled) {
+        setValue("");
+        setIsOpen(false);
+      }
+    };
+
+    root.addEventListener("listbox:setdisabled", handleSetDisabled);
+    return () => root.removeEventListener("listbox:setdisabled", handleSetDisabled);
+  }, []);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -47,6 +65,8 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (isDisabled) return;
+
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setIsOpen(true);
@@ -69,16 +89,23 @@ export function Listbox({ id, name, options, placeholder = "Selecione", classNam
 
   return (
     <div ref={rootRef} className={cn("relative", className)}>
-      {name && <input ref={hiddenInputRef} type="hidden" name={name} value={value} />}
+      {name && (
+        <input ref={hiddenInputRef} type="hidden" name={name} value={value} disabled={isDisabled} />
+      )}
 
       <button
         id={id}
         type="button"
+        disabled={isDisabled}
         onClick={() => setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-white/10 bg-black px-4 py-3 text-left text-white focus:border-primary focus:outline-none"
+        aria-disabled={isDisabled}
+        className={cn(
+          "flex w-full items-center justify-between rounded-lg border border-white/10 bg-black px-4 py-3 text-left text-white focus:border-primary focus:outline-none",
+          isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+        )}
       >
         <span className={value ? "text-white" : "text-white/40"}>{value || placeholder}</span>
         <Icon

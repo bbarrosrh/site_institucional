@@ -17,7 +17,7 @@ export const developedSkills: DevelopedSkill[] = [
     icon: "user-filled",
     color: "bg-sky-400",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      "Competências comportamentais que fortalecem a forma como você se conecta e conduz pessoas no dia a dia.",
     items: [
       "Inteligência emocional e comunicação estratégica",
       "Liderança humanizada",
@@ -31,7 +31,7 @@ export const developedSkills: DevelopedSkill[] = [
     icon: "diamond-filled",
     color: "bg-purple-600",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      "Domínio prático do que a rotina profissional exige, unindo execução consistente à entrega de números.",
     items: [
       "Competências técnicas da função",
       "Planejamento estratégico",
@@ -45,7 +45,7 @@ export const developedSkills: DevelopedSkill[] = [
     icon: "seedling-filled",
     color: "bg-green-600",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      "Visão de longo prazo que une consciência ambiental, senso de propósito coletivo e sustentabilidade.",
     items: [
       "Sustentabilidade corporativa",
       "ESG e responsabilidade social",
@@ -60,7 +60,7 @@ export const developedSkills: DevelopedSkill[] = [
     icon: "bolt",
     color: "bg-pink-500",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      "Raciocínio rápido e clareza para agir com segurança diante de cenários desafiadores e em constante mudança.",
     items: [
       "Pensamento crítico e capacidade analítica",
       "Agilidade mental e aprendizagem contínua",

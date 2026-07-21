@@ -22,8 +22,17 @@ interface Props {
   slides: CardCarouselSlide[];
 }
 
+function getInitialIndex(slides: CardCarouselSlide[]) {
+  if (typeof window === "undefined") return 0;
+
+  const param = new URLSearchParams(window.location.search).get("slide");
+  const parsed = param === null ? NaN : Number(param) - 1;
+
+  return Number.isInteger(parsed) && parsed >= 0 && parsed < slides.length ? parsed : 0;
+}
+
 export function CardCarousel({ title, slides }: Props) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => getInitialIndex(slides));
   const slide = slides[index];
 
   const goTo = (next: number) => setIndex((next + slides.length) % slides.length);

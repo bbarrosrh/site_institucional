@@ -7,7 +7,6 @@ import People from "@/components/Sections/Shared/People/index.astro";
 import CallToAction from "@/components/Sections/Shared/CallToAction.astro";
 
 import { helpSlides } from "@/data/Business/help";
-import { partners } from "@/data/Business/partners";
 
 export const prerender = true;
 ---
@@ -20,7 +19,7 @@ export const prerender = true;
   />
   <CardCarousel title="Como podemos te ajudar" slides={helpSlides} />
   <Methodology />
-  <People title="Conheça nossos parceiros" people={partners} />
+  <People title="Conheça nossos parceiros" variant="partner" />
   <CallToAction
     title="Pronto para dar o próximo passo?"
     subtitle="Vamos conversar sobre qual caminho faz mais sentido para o seu momento."

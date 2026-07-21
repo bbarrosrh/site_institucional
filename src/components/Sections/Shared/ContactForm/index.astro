@@ -3,7 +3,7 @@ import { cn } from "@/utils/className";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { Listbox } from "./Listbox";
-import { contactSubjects } from "@/data/contact";
+import { contactSubjects, talentBankSubject } from "@/data/contact";
 
 interface Props {
   subjectLabel?: string;
@@ -73,8 +73,24 @@ const fid = (base: string) => `${base}-${uid}`;
         name="subject"
         options={subjectOptions}
         placeholder={subjectPlaceholder}
+        className="subject-listbox"
       />
       <p class="subject-error hidden text-sm text-red-400">Selecione um assunto.</p>
+
+      <label class="mt-4 flex select-none items-center gap-2 text-white/80">
+        <input
+          type="checkbox"
+          class="talent-bank-checkbox size-4 rounded border-white/20 bg-black accent-primary"
+        />
+        {talentBankSubject}
+      </label>
+      <input
+        type="hidden"
+        name="subject"
+        class="talent-bank-subject-input"
+        value={talentBankSubject}
+        disabled
+      />
     </div>
 
     <div class="resume-wrapper hidden flex-col gap-1">
@@ -109,7 +125,9 @@ const fid = (base: string) => `${base}-${uid}`;
       />
     </div>
 
-    <label class="flex items-center gap-2 text-sm sm:text-lg text-white/80 my-2 sm:my-4">
+    <label
+      class="flex select-none items-center gap-2 text-sm sm:text-lg text-white/80 my-2 sm:my-4"
+    >
       <input
         type="checkbox"
         required
@@ -138,6 +156,7 @@ const fid = (base: string) => `${base}-${uid}`;
 
 <script>
   import { talentBankSubject } from "@/data/contact";
+  import { presetContactSubject } from "@/stores/contactModal";
 
   declare const grecaptcha: {
     getResponse: (widgetId?: number) => string;
@@ -151,8 +170,12 @@ const fid = (base: string) => `${base}-${uid}`;
   function initContactForm(form: HTMLFormElement) {
     const submitButton = form.querySelector<HTMLButtonElement>(".submit");
     const submitSpinner = form.querySelector<HTMLSpanElement>(".submit-spinner");
-    const subjectInput = form.querySelector<HTMLInputElement>('input[name="subject"]');
     const subjectError = form.querySelector<HTMLParagraphElement>(".subject-error");
+    const subjectListbox = form.querySelector<HTMLElement>(".subject-listbox");
+    const talentBankCheckbox = form.querySelector<HTMLInputElement>(".talent-bank-checkbox");
+    const talentBankSubjectInput = form.querySelector<HTMLInputElement>(
+      ".talent-bank-subject-input"
+    );
     const resumeWrapper = form.querySelector<HTMLDivElement>(".resume-wrapper");
     const resumeInput = form.querySelector<HTMLInputElement>('input[name="resume"]');
     const resumeError = form.querySelector<HTMLParagraphElement>(".resume-error");
@@ -171,7 +194,7 @@ const fid = (base: string) => `${base}-${uid}`;
       return index >= 0 ? index : undefined;
     };
 
-    const isTalentBankSelected = () => subjectInput?.value === talentBankSubject;
+    const isTalentBankSelected = () => talentBankCheckbox?.checked ?? false;
 
     const updateSubjectDependentFields = () => {
       const isTalentBank = isTalentBankSelected();
@@ -204,7 +227,24 @@ const fid = (base: string) => `${base}-${uid}`;
       }
     };
 
-    subjectInput?.addEventListener("change", updateSubjectDependentFields);
+    const setTalentBankMode = (checked: boolean) => {
+      if (talentBankCheckbox) talentBankCheckbox.checked = checked;
+      if (talentBankSubjectInput) talentBankSubjectInput.disabled = !checked;
+      subjectListbox?.dispatchEvent(new CustomEvent("listbox:setdisabled", { detail: checked }));
+      subjectError?.classList.add("hidden");
+      updateSubjectDependentFields();
+    };
+
+    talentBankCheckbox?.addEventListener("change", () => {
+      setTalentBankMode(talentBankCheckbox.checked);
+    });
+
+    presetContactSubject.subscribe((subject) => {
+      if (subject !== talentBankSubject) return;
+      setTalentBankMode(true);
+      presetContactSubject.set(null);
+    });
+
     updateSubjectDependentFields();
 
     resumeInput?.addEventListener("change", () => {
