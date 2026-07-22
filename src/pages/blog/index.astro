@@ -1,0 +1,15 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import Banner from "@/components/Layout/Banner.astro";
+import BlogGrid from "@/components/Sections/Blog/BlogGrid.astro";
+
+export const prerender = true;
+---
+
+<Root
+  title="Blog"
+  description="Confira todas as postagens do Blog B. Barros: conteúdo sobre carreira, gestão e desenvolvimento profissional."
+>
+  <Banner eyebrow="Blog B.Barros" title="Fique por dentro das nossas novidades" />
+  <BlogGrid />
+</Root>

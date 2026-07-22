@@ -30,6 +30,7 @@
     "@react-email/render": "^2.1.0",
     "@sanity/astro": "^3.4.0",
     "@sanity/client": "^7.22.1",
+    "@sanity/locale-pt-br": "^1.1.33",
     "@tabler/icons-react": "^3.44.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.2.16",

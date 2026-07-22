@@ -1,0 +1,71 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import BlogCard from "./BlogCard.astro";
+import { sanityFetch } from "@/sanity/client";
+import { ALL_BLOG_POSTS_QUERY, type BlogPost } from "@/sanity/schemas/Blog/data";
+import { exampleBlogPosts } from "@/sanity/schemas/Blog/exampleData";
+import { cn } from "@/utils/className";
+
+const ROWS_PER_PAGE = 2;
+const COLUMNS = 3;
+const VISIBLE_COUNT = ROWS_PER_PAGE * COLUMNS;
+
+const fetchedPosts = await sanityFetch<BlogPost[]>(
+  ALL_BLOG_POSTS_QUERY,
+  {},
+  { perspective: "published" }
+);
+const posts = fetchedPosts && fetchedPosts.length > 0 ? fetchedPosts : exampleBlogPosts;
+const hasMore = posts.length > VISIBLE_COUNT;
+---
+
+<Section>
+  <div
+    class="blog-grid grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6"
+  >
+    {
+      posts.map((post, index) => (
+        <div class={cn("h-full", index >= VISIBLE_COUNT && "hidden")}>
+          <BlogCard post={post} />
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    hasMore && (
+      <Button
+        type="button"
+        variant="outline"
+        size="lg"
+        className="load-more-posts self-center"
+        data-visible-count={VISIBLE_COUNT}
+      >
+        Carregar mais
+        <Icon name="arrow-down" />
+      </Button>
+    )
+  }
+</Section>
+
+<script>
+  const LOAD_MORE_COUNT = 6;
+
+  document.querySelectorAll<HTMLButtonElement>(".load-more-posts").forEach((button) => {
+    const grid = button.closest("section")?.querySelector<HTMLElement>(".blog-grid");
+    if (!grid) return;
+
+    let visibleCount = Number(button.dataset.visibleCount) || 0;
+
+    button.addEventListener("click", () => {
+      const items = Array.from(grid.children) as HTMLElement[];
+      const next = items.slice(visibleCount, visibleCount + LOAD_MORE_COUNT);
+      next.forEach((item) => item.classList.remove("hidden"));
+      visibleCount += next.length;
+
+      if (visibleCount >= items.length) button.classList.add("hidden");
+    });
+  });
+</script>

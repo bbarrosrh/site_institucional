@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { ptBRLocale } from "@sanity/locale-pt-br";
 import { sanityConfig } from "./src/sanity/config";
 import { blogPostSchema } from "./src/sanity/schemas/Blog";
 import { testimonialSchema } from "./src/sanity/schemas/Testimonials";
@@ -10,6 +11,7 @@ export default defineConfig({
   ...sanityConfig,
   title: "Content Studio",
   plugins: [
+    ptBRLocale(),
     structureTool({
       structure: (S) =>
         S.list()

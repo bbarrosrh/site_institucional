@@ -1,0 +1,61 @@
+---
+import { Icon } from "@/components/Icon";
+import type { BlogPost } from "@/sanity/schemas/Blog/data";
+import placeholder from "@/assets/images/placeholder.png";
+import { Route } from "@/data/routes";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+
+const imageSrc = post.image ? `${post.image}?w=800&auto=format` : placeholder.src;
+
+const DESCRIPTION_LIMIT = 140;
+const flatDescription = post.description.replace(/\s+/g, " ").trim();
+const truncatedDescription =
+  flatDescription.length > DESCRIPTION_LIMIT
+    ? `${flatDescription.slice(0, DESCRIPTION_LIMIT).trim()}…`
+    : flatDescription;
+
+const formattedDate = new Date(post.publishedAt).toLocaleDateString("pt-BR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<a
+  href={Route.blogPost(post.slug)}
+  class="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-black text-left"
+>
+  <div class="relative w-full aspect-3/2 bg-white">
+    <img src={imageSrc} alt="" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+  </div>
+
+  <div class="flex flex-1 flex-col gap-3 p-3 bg-tertiary lg:p-6">
+    <h3 class="line-clamp-2 font-heading text-base font-semibold text-white lg:text-xl">
+      {post.title}
+    </h3>
+    <p class="text-sm leading-relaxed text-white/70">{truncatedDescription}</p>
+
+    <div class="mt-auto flex items-center gap-2 pt-3 font-semibold text-primary">
+      Continuar lendo
+      <span class="relative inline-block size-4 overflow-hidden">
+        <Icon
+          name="arrow-right"
+          className="absolute inset-0 size-4 transition-transform duration-300 ease-out group-hover:translate-x-4"
+        />
+        <Icon
+          name="arrow-right"
+          className="absolute inset-0 size-4 -translate-x-4 transition-transform duration-300 ease-out group-hover:translate-x-0"
+        />
+      </span>
+    </div>
+
+    <p class="border-t border-white/10 pt-3 text-sm text-white/50">{formattedDate}</p>
+  </div>
+
+  <div class="pointer-events-none absolute inset-0 group-hover:bg-black/15"></div>
+</a>

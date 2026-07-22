@@ -8,6 +8,8 @@ export const exampleBlogPosts: BlogPost[] = [
     slug: EXAMPLE_POST_SLUG,
     publishedAt: "2026-01-10",
     author: "Equipe",
+    description:
+      "Este é um post de exemplo, exibido localmente porque nenhum projeto Sanity foi configurado ainda (ou ele ainda não tem posts publicados).",
     image: null,
   },
   {
@@ -15,6 +17,8 @@ export const exampleBlogPosts: BlogPost[] = [
     slug: "teste-um",
     publishedAt: "2026-01-08",
     author: "Equipe",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: null,
   },
   {
@@ -22,6 +26,8 @@ export const exampleBlogPosts: BlogPost[] = [
     slug: "teste-dois",
     publishedAt: "2026-01-05",
     author: "Equipe",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: null,
   },
   {
@@ -29,6 +35,8 @@ export const exampleBlogPosts: BlogPost[] = [
     slug: "teste-tres",
     publishedAt: "2026-01-03",
     author: "Equipe",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: null,
   },
   {
@@ -36,6 +44,8 @@ export const exampleBlogPosts: BlogPost[] = [
     slug: "teste-4",
     publishedAt: "2026-01-01",
     author: "Equipe",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: null,
   },
 ];

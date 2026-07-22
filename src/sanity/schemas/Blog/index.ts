@@ -26,6 +26,13 @@ export const blogPostSchema = defineType({
     }),
     defineField({ name: "author", title: "Autor", type: "string" }),
     defineField({
+      name: "description",
+      title: "Descrição",
+      type: "text",
+      rows: 3,
+      validation: (R) => R.required(),
+    }),
+    defineField({
       name: "image",
       title: "Imagem de capa",
       type: "image",

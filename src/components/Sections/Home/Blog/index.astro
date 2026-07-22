@@ -6,6 +6,7 @@ import { sanityFetch } from "@/sanity/client";
 import { BLOG_POSTS_QUERY, type BlogPost } from "@/sanity/schemas/Blog/data";
 import { exampleBlogPosts } from "@/sanity/schemas/Blog/exampleData";
 import BlogPostCard from "./BlogPostCard.astro";
+import { Route } from "@/data/routes";
 
 const fetchedPosts = await sanityFetch<BlogPost[]>(
   BLOG_POSTS_QUERY,
@@ -45,7 +46,7 @@ const [featured, ...rest] = posts;
     )
   }
 
-  <Button size="lg">
+  <Button href={Route.BLOG} size="lg">
     Veja todas as postagens
     <Icon name="arrow-right" />
   </Button>

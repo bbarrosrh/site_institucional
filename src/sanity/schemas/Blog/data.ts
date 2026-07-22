@@ -3,6 +3,7 @@ export interface BlogPost {
   slug: string;
   publishedAt: string;
   author: string | null;
+  description: string;
   image: string | null;
 }
 
@@ -42,6 +43,16 @@ export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(publishedAt desc
   "slug": slug.current,
   publishedAt,
   author,
+  description,
+  "image": image.asset->url,
+}`;
+
+export const ALL_BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(publishedAt desc) {
+  title,
+  "slug": slug.current,
+  publishedAt,
+  author,
+  description,
   "image": image.asset->url,
 }`;
 
@@ -52,6 +63,7 @@ export const BLOG_POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][
   "slug": slug.current,
   publishedAt,
   author,
+  description,
   "image": image.asset->url,
   body[] {
     ...,
