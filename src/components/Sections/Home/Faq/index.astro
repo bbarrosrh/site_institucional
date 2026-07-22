@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import DuoSection from "@/components/Layout/Section/Duo.astro";
 import Accordion from "./Accordion.astro";
 import { accordionItems } from "@/data/Home/faq";
@@ -15,10 +16,11 @@ import venus from "@/assets/images/Home/venus.png";
     {accordionItems.map((item) => <Accordion question={item.question} answer={item.answer} />)}
   </div>
 
-  <img
+  <Image
     id="faq-image"
     slot="right"
-    src={venus.src}
+    src={venus}
+    format="webp"
     alt=""
     class="hidden w-full rounded-2xl object-cover object-top lg:block"
   />

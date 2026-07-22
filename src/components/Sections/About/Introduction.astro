@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import DuoSection from "@/components/Layout/Section/Duo.astro";
 import compass from "@/assets/images/About/compass.png";
 ---
@@ -24,8 +25,9 @@ import compass from "@/assets/images/About/compass.png";
   </div>
 
   <div slot="right" class="max-lg:full-bleed">
-    <img
-      src={compass.src}
+    <Image
+      src={compass}
+      format="webp"
       alt="Bússola, símbolo da mentoria de carreira da B.Barros"
       class="w-full lg:rounded-3xl object-cover lg:h-full lg:aspect-auto"
     />

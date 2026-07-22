@@ -11,7 +11,7 @@ export const footerColumns: FooterColumn[] = [
       { title: "Sobre Nós", href: Route.ABOUT },
       { title: "Instituto", href: Route.INSTITUTE },
       { title: "Blog", href: "#" },
-      { title: "Loja", href: "#" },
+      { title: "Loja", href: Route.STORE },
     ],
   },
   {
@@ -48,8 +48,8 @@ export const socialLinks: SocialLink[] = [
 
 export const contactInfo = {
   email: {
-    label: "recursoshumanos@bbarros.com.br",
-    href: "https://mail.google.com/mail/?view=cm&fs=1&to=recursoshumanos@bbarros.com.br",
+    label: "contato@bbarros.com.br",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=contato@bbarros.com.br",
   },
   whatsapp: {
     label: "+55 (11) 98711-9763",

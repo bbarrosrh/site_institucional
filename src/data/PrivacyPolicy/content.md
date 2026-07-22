@@ -86,4 +86,4 @@ página.
 Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de dados pessoais,
 entre em contato:
 
-E-mail: recursoshumanos@bbarros.com.br
+E-mail: contato@bbarros.com.br

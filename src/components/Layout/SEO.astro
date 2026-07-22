@@ -1,19 +1,74 @@
 ---
+import { getImage } from "astro:assets";
+import defaultOgImage from "@/assets/images/adao.png";
+
+const SITE_NAME = "B. Barros";
+const DEFAULT_DESCRIPTION =
+  "Mentoria humanizada, formação de mentores e consultoria organizacional para pessoas e empresas que querem clareza, direção e resultado real.";
+
 interface Props {
   title: string;
+  description?: string;
+  image?: ImageMetadata | string;
 }
 
-const { title } = Astro.props;
-const fullTitle = `${title} | B. Barros`;
-const description = "Transformando potências em líderes";
+const { title, description = DEFAULT_DESCRIPTION, image } = Astro.props;
+const fullTitle = `${title} | ${SITE_NAME}`;
+
+const resolvedImageSrc =
+  typeof image === "string"
+    ? image
+    : (await getImage({ src: image ?? defaultOgImage, format: "webp", width: 1200 })).src;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const imageUrl = new URL(resolvedImageSrc, Astro.site).toString();
+const siteUrl = Astro.site?.toString() ?? "https://www.bbarros.com.br/";
+const logoUrl = new URL("/favicon.ico", Astro.site).toString();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "B.Barros Recursos Humanos",
+      legalName: "B. Barros Recursos Humanos LTDA",
+      url: siteUrl,
+      logo: logoUrl,
+      email: "contato@bbarros.com.br",
+      telephone: "+5511987119763",
+      sameAs: ["https://www.instagram.com/bbarrosrh/"],
+      founder: { "@id": `${siteUrl}#bruna-barros` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}#bruna-barros`,
+      name: "Bruna Barros",
+      jobTitle: "Psicóloga e Fundadora",
+      url: siteUrl,
+      worksFor: { "@id": `${siteUrl}#organization` },
+      sameAs: ["https://www.linkedin.com/in/brunabarrospsicologia/"],
+    },
+  ],
+};
 ---
 
 <title>{fullTitle}</title>
 <link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="canonical" href={canonicalUrl} />
 <meta name="description" content={description} />
+
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:image" content={imageUrl} />
+
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

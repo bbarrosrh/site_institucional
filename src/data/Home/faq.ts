@@ -7,7 +7,7 @@ export const accordionItems: AccordionItem[] = [
   {
     question: "Como funciona a mentoria da B.Barros?",
     answer:
-      "A mentoria é individual, com encontros periódicos e uma metodologia própria que combina Psicologia e estratégia de carreira, adaptada ao momento de cada pessoa.",
+      "A mentoria é individual, com encontros periódicos e metodologias próprias que combinam Psicologia e estratégia de carreira, adaptada ao momento de cada pessoa.",
   },
   {
     question: "Quanto tempo dura o processo?",

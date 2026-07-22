@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import DuoSection from "@/components/Layout/Section/Duo.astro";
 import mosaico from "@/assets/images/Institute/mosaico.png";
 ---
@@ -30,8 +31,9 @@ import mosaico from "@/assets/images/Institute/mosaico.png";
   </div>
 
   <div slot="right">
-    <img
-      src={mosaico.src}
+    <Image
+      src={mosaico}
+      format="webp"
       alt="Mosaico de fotos de Eronides Barros"
       class="w-auto mx-auto mb-12 object-cover lg:h-full lg:rounded-3xl lg:aspect-auto"
     />

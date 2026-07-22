@@ -22,7 +22,7 @@ export const stats: Stat[] = [
     sublabel: "Média do mercado: 50%",
   },
   {
-    value: "100%",
+    value: "98%",
     label: "Expectativas atendidas ou superadas",
   },
 ];

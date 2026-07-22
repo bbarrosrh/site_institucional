@@ -1,0 +1,15 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import ProductCard from "./ProductCard.astro";
+import { featuredProducts } from "@/data/Store/products";
+---
+
+<Section>
+  <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
+    Em Destaque
+  </h2>
+
+  <div class="grid w-full gap-6 sm:grid-cols-3 xl:grid-cols-4">
+    {featuredProducts.map((product) => <ProductCard product={product} />)}
+  </div>
+</Section>

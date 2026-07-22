@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { Checklist } from "@/components/Checklist";
 import type { CoveredTopic } from "@/data/Mentoring/coveredTopics";
 
@@ -13,8 +14,9 @@ const { topic } = Astro.props;
   class="w-full max-w-full min-w-0 shrink-0 snap-start overflow-hidden rounded-2xl bg-black lg:w-[35vw] lg:max-w-none lg:min-w-lg"
 >
   <div class="relative h-48">
-    <img
-      src={topic.image.src}
+    <Image
+      src={topic.image}
+      format="webp"
       alt=""
       class="absolute inset-0 h-full w-full object-cover object-center"
     />

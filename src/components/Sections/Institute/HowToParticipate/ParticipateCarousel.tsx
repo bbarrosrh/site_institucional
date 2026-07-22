@@ -3,11 +3,13 @@ import { cn } from "@/utils/className";
 import { CarouselNavButton } from "@/components/CarouselNavButton";
 import type { ParticipateItem } from "@/data/Institute/participate";
 
+type OptimizedParticipateItem = Omit<ParticipateItem, "image"> & { image: string };
+
 interface Props {
-  items: ParticipateItem[];
+  items: OptimizedParticipateItem[];
 }
 
-function CardContent({ item, index }: { item: ParticipateItem; index: number }) {
+function CardContent({ item, index }: { item: OptimizedParticipateItem; index: number }) {
   return (
     <>
       <div className="p-4">
@@ -20,11 +22,7 @@ function CardContent({ item, index }: { item: ParticipateItem; index: number }) 
         <p className="mt-2 text-sm leading-relaxed text-white/70 sm:text-lg">{item.description}</p>
       </div>
 
-      <img
-        src={item.image.src}
-        alt=""
-        className="h-40 w-full rounded-2xl object-cover lg:flex-1"
-      />
+      <img src={item.image} alt="" className="h-40 w-full rounded-2xl object-cover lg:flex-1" />
     </>
   );
 }

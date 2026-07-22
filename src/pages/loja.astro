@@ -1,0 +1,17 @@
+---
+import Root from "@/components/Layout/Root.astro";
+import HeroCarousel from "@/components/Sections/Store/HeroCarousel/index.astro";
+import FeaturedProducts from "@/components/Sections/Store/FeaturedProducts.astro";
+import ProductGrid from "@/components/Sections/Store/ProductGrid.astro";
+
+export const prerender = true;
+---
+
+<Root
+  title="Loja"
+  description="Cada conquista profissional merece ser lembrada: produtos exclusivos da B.Barros que transformam objetivos alcançados em objetos para o seu dia a dia de trabalho."
+>
+  <HeroCarousel />
+  <FeaturedProducts />
+  <ProductGrid />
+</Root>

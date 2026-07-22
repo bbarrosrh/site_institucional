@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /studio/
+
+Sitemap: https://www.bbarros.com.br/sitemap-index.xml

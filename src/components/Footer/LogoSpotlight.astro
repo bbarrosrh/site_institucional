@@ -2,18 +2,16 @@
 interface Props {
   raw: string;
   id: string;
-  ariaLabel?: string;
   class?: string;
 }
 
-const { raw, id, ariaLabel, class: className } = Astro.props;
+const { raw, id, class: className } = Astro.props;
 ---
 
 <div id={`${id}-container`} class:list={["relative overflow-hidden", className]}>
   <div
     id={`${id}-reveal`}
     class="w-full select-none block lg:opacity-40 [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
-    aria-label={ariaLabel}
     set:html={raw}
   />
 </div>

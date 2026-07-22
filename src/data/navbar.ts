@@ -43,5 +43,5 @@ export const navLinks: NavLink[] = [
   },
   { name: "Instituto", href: Route.INSTITUTE },
   { name: "Blog", href: "#" },
-  { name: "Loja", href: "#" },
+  { name: "Loja", href: Route.STORE },
 ];

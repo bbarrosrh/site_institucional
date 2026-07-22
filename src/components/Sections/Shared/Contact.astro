@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import ContactForm from "@/components/Sections/Shared/ContactForm/index.astro";
 
 interface Props {
@@ -18,7 +19,12 @@ const { image, subjectLabel, subjectOptions } = Astro.props;
       </div>
 
       <div class="relative hidden lg:block">
-        <img src={image.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+        <Image
+          src={image}
+          format="webp"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+        />
       </div>
     </div>
   </div>

@@ -1,0 +1,10 @@
+---
+import { StoreHeroCarousel } from "./StoreHeroCarousel";
+import { storeHeroSlides } from "@/data/Store/heroSlides";
+---
+
+<section class="lg:pt-20">
+  <div class="section-container">
+    <StoreHeroCarousel client:load slides={storeHeroSlides} />
+  </div>
+</section>

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import DuoSection from "@/components/Layout/Section/Duo.astro";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
@@ -27,8 +28,9 @@ import { Route } from "@/data/routes";
       {
         achievements.map((achievement) => (
           <div class="flex flex-col items-center gap-4 rounded-2xl bg-tertiary/50 p-4 text-center lg:flex-row lg:bg-transparent lg:p-0 lg:text-left">
-            <img
-              src={achievement.icon.src}
+            <Image
+              src={achievement.icon}
+              format="webp"
               alt=""
               class="size-12 border border-white shrink-0 rounded-full object-cover"
             />
@@ -52,8 +54,10 @@ import { Route } from "@/data/routes";
       <div class="bg-grid absolute inset-0"></div>
     </div>
 
-    <img
-      src={bruna.src}
+    <Image
+      src={bruna}
+      format="webp"
+      width={800}
       alt="Bruna Barros"
       class="absolute right-0 bottom-0 w-4/5 max-w-none object-contain drop-shadow-2xl"
     />

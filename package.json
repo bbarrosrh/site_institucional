@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/react": "^5.0.7",
+    "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^10.0.8",
     "@fontsource/caveat": "^5.2.8",
     "@fontsource/lora": "^5.2.8",

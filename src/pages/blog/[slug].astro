@@ -38,9 +38,17 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString("pt-BR", {
 
 const pageUrl = Astro.url.href;
 const heroImageSrc = post.image ? `${post.image}?w=1400&auto=format` : placeholder.src;
+
+const firstParagraph = post.body?.find(
+  (block): block is Extract<typeof block, { _type: "block" }> =>
+    block._type === "block" && block.style === "normal"
+);
+const excerptText = firstParagraph?.children.map((child) => child.text).join("") ?? "";
+const description =
+  excerptText.length > 155 ? `${excerptText.slice(0, 155).trim()}…` : excerptText || undefined;
 ---
 
-<Root title={post.title}>
+<Root title={post.title} description={description} image={post.image ?? undefined}>
   <div class="relative h-auto lg:h-96 w-full overflow-hidden bg-slate-900">
     <img
       src={heroImageSrc}

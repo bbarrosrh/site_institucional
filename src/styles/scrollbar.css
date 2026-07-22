@@ -6,6 +6,23 @@
   }
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #fff transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+
 @supports not selector(::-webkit-scrollbar) {
   .scrollbar-mini {
     scrollbar-width: thin;

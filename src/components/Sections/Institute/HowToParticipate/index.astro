@@ -1,15 +1,23 @@
 ---
+import { getImage } from "astro:assets";
 import Section from "@/components/Layout/Section/index.astro";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { ParticipateCarousel } from "./ParticipateCarousel";
 import { participateItems } from "@/data/Institute/participate";
+
+const optimizedItems = await Promise.all(
+  participateItems.map(async (item) => {
+    const optimized = await getImage({ src: item.image, format: "webp" });
+    return { ...item, image: optimized.src };
+  })
+);
 ---
 
 <Section secondary>
   <h2 class="section-title">Como você pode participar</h2>
 
-  <ParticipateCarousel client:load items={participateItems} />
+  <ParticipateCarousel client:load items={optimizedItems} />
 
   <Button variant="secondary" size="lg">
     Quero ajudar o instituto

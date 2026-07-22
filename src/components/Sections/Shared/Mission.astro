@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { Icon } from "@/components/Icon";
 
 interface Props {
@@ -28,7 +29,7 @@ const { mission, image } = Astro.props;
     </div>
 
     <div class="relative aspect-square ml-auto">
-      <img src={image.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+      <Image src={image} format="webp" alt="" class="absolute inset-0 h-full w-full object-cover" />
     </div>
   </div>
 </section>

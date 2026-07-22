@@ -152,3 +152,16 @@ tem fallback hardcoded (trata o `null`/vazio como a página precisar).
 - Ícones de UI (menu, setas) usam o componente `Icon` + mapa em
   [Icon/IconName.tsx](src/components/Icon/IconName.tsx) (Tabler Icons)
 - Logos de marca (redes sociais no Footer) usam SVG inline com o path oficial da marca, não use Tabler nesse caso.
+
+## Imagens
+
+- Toda imagem estática (asset local importado, raster) usa `<Image>` de `astro:assets` com
+  `format="webp"` por padrão — nunca `<img src={x.src}>` puro. Só use `<img>` quando houver motivo
+  específico: SVG (logos, decorações vetoriais — converter pra webp seria perder escalabilidade), ou
+  URL dinâmica/remota (ex.: foto vinda do Sanity, que já é otimizada pelo próprio CDN).
+- Dentro de ilhas React (`.tsx`), `<Image>` não pode ser usado diretamente (é um componente Astro).
+  Resolva a imagem no `.astro` pai com `getImage()` de `astro:assets` e passe a URL já processada
+  (string) como prop pro componente React.
+- Se o tamanho de exibição for bem menor que a resolução da imagem-fonte, passe `width` (ou
+  `widths`/`sizes` para `srcset` responsivo) — sem isso, `<Image>` só recomprime no tamanho
+  original, sem redimensionar.

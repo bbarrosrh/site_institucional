@@ -1,0 +1,29 @@
+---
+import Section from "@/components/Layout/Section/index.astro";
+import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import ProductCard from "./ProductCard.astro";
+import { products } from "@/data/Store/products";
+
+const VISIBLE_COUNT = 8;
+const visibleProducts = products.slice(0, VISIBLE_COUNT);
+---
+
+<Section>
+  <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
+    Todos os Produtos ({products.length})
+  </h2>
+
+  <div class="grid w-full gap-6 sm:grid-cols-3 xl:grid-cols-4">
+    {visibleProducts.map((product) => <ProductCard product={product} />)}
+  </div>
+
+  {
+    products.length > VISIBLE_COUNT && (
+      <Button variant="primary" size="lg" className="self-center">
+        Carregar mais
+        <Icon name="arrow-down" />
+      </Button>
+    )
+  }
+</Section>
