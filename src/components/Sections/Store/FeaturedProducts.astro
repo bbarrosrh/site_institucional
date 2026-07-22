@@ -1,15 +1,43 @@
 ---
 import Section from "@/components/Layout/Section/index.astro";
 import ProductCard from "./ProductCard.astro";
-import { featuredProducts } from "@/data/Store/products";
+import { sanityFetch } from "@/sanity/client";
+import {
+  FEATURED_PRODUCTS_QUERY,
+  RECENT_PRODUCTS_QUERY,
+  type Product,
+} from "@/sanity/schemas/Store/data";
+
+const FEATURED_COUNT = 4;
+
+const featured = (await sanityFetch<Product[]>(FEATURED_PRODUCTS_QUERY)) ?? [];
+
+const missing = FEATURED_COUNT - featured.length;
+const fallback =
+  missing > 0
+    ? ((await sanityFetch<Product[]>(RECENT_PRODUCTS_QUERY, {
+        excludeIds: featured.map((product) => product._id),
+        limit: missing,
+      })) ?? [])
+    : [];
+
+const featuredProducts = [...featured, ...fallback];
 ---
 
-<Section>
-  <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
-    Em Destaque
-  </h2>
+{
+  featuredProducts.length > 0 && (
+    <Section>
+      <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
+        Em Destaque
+      </h2>
 
-  <div class="grid w-full gap-6 sm:grid-cols-3 xl:grid-cols-4">
-    {featuredProducts.map((product) => <ProductCard product={product} />)}
-  </div>
-</Section>
+      <div class="grid w-full grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+        {featuredProducts.map((product) => (
+          <div class="h-full">
+            <ProductCard product={product} imageAspectClass="aspect-[21/9] lg:aspect-4/3" />
+          </div>
+        ))}
+      </div>
+    </Section>
+  )
+}

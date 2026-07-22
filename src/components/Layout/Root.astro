@@ -61,6 +61,35 @@ const hasFancyScrollbar = import.meta.env.PUBLIC_FANCY_SCROLLBAR === "true";
 </script>
 
 <script>
+  import { openProduct, isProductModalOpen } from "@/stores/storeModal";
+  import type { Product } from "@/sanity/schemas/Store/data";
+
+  const openProductModal = (trigger: HTMLElement) => {
+    if (!trigger.dataset.product) return;
+
+    const product = JSON.parse(trigger.dataset.product) as Product;
+    if (product.soldOut) return;
+
+    openProduct.set(product);
+    isProductModalOpen.set(true);
+  };
+
+  document.addEventListener("click", (event) => {
+    const trigger = (event.target as HTMLElement).closest<HTMLElement>(".product-card-trigger");
+    if (trigger) openProductModal(trigger);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const trigger = (event.target as HTMLElement).closest<HTMLElement>(".product-card-trigger");
+    if (!trigger) return;
+
+    event.preventDefault();
+    openProductModal(trigger);
+  });
+</script>
+
+<script>
   const EASE = 0.05;
 
   function initFancyScroll() {

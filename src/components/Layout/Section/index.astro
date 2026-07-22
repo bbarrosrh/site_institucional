@@ -14,7 +14,7 @@ const { id, secondary, backgroundImage, noPbMobile } = Astro.props;
 <section
   id={id}
   class={cn(
-    "section-wrapper",
+    "section-wrapper overflow-x-hidden",
     noPbMobile && "max-sm:pb-0",
     secondary && !backgroundImage && "bg-tertiary"
   )}

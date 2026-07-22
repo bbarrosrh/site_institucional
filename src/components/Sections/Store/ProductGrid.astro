@@ -3,27 +3,63 @@ import Section from "@/components/Layout/Section/index.astro";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import ProductCard from "./ProductCard.astro";
-import { products } from "@/data/Store/products";
+import { sanityFetch } from "@/sanity/client";
+import { ALL_PRODUCTS_QUERY, type Product } from "@/sanity/schemas/Store/data";
+import { cn } from "@/utils/className";
 
 const VISIBLE_COUNT = 8;
-const visibleProducts = products.slice(0, VISIBLE_COUNT);
+
+const products = (await sanityFetch<Product[]>(ALL_PRODUCTS_QUERY)) ?? [];
+const hasMore = products.length > VISIBLE_COUNT;
 ---
 
-<Section>
-  <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
-    Todos os Produtos ({products.length})
-  </h2>
+{
+  products.length > 0 && (
+    <Section>
+      <h2 class="w-full text-center text-xl font-semibold text-white lg:text-left lg:text-2xl">
+        Todos os Produtos ({products.length})
+      </h2>
 
-  <div class="grid w-full gap-6 sm:grid-cols-3 xl:grid-cols-4">
-    {visibleProducts.map((product) => <ProductCard product={product} />)}
-  </div>
+      <div class="product-grid grid w-full grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+        {products.map((product, index) => (
+          <div class={cn("h-full", index >= VISIBLE_COUNT && "hidden")}>
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
 
-  {
-    products.length > VISIBLE_COUNT && (
-      <Button variant="primary" size="lg" className="self-center">
-        Carregar mais
-        <Icon name="arrow-down" />
-      </Button>
-    )
-  }
-</Section>
+      {hasMore && (
+        <Button
+          type="button"
+          variant="primary"
+          size="lg"
+          className="load-more-products self-center"
+          data-visible-count={VISIBLE_COUNT}
+        >
+          Carregar mais
+          <Icon name="arrow-down" />
+        </Button>
+      )}
+    </Section>
+  )
+}
+
+<script>
+  const LOAD_MORE_COUNT = 8;
+
+  document.querySelectorAll<HTMLButtonElement>(".load-more-products").forEach((button) => {
+    const grid = button.closest("section")?.querySelector<HTMLElement>(".product-grid");
+    if (!grid) return;
+
+    let visibleCount = Number(button.dataset.visibleCount) || 0;
+
+    button.addEventListener("click", () => {
+      const items = Array.from(grid.children) as HTMLElement[];
+      const next = items.slice(visibleCount, visibleCount + LOAD_MORE_COUNT);
+      next.forEach((item) => item.classList.remove("hidden"));
+      visibleCount += next.length;
+
+      if (visibleCount >= items.length) button.classList.add("hidden");
+    });
+  });
+</script>

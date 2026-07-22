@@ -1,0 +1,20 @@
+---
+import Modal from "@/components/Modal.astro";
+import { ProductModalContent } from "./ProductModalContent";
+import { ProductModalFooter } from "./ProductModalFooter";
+---
+
+<Modal
+  id="product-modal"
+  cardClass="h-auto max-h-[90dvh] lg:h-auto lg:max-h-[75dvh] lg:w-[85%] xl:w-3/4"
+>
+  <ProductModalContent client:load />
+  <ProductModalFooter slot="footer" client:load />
+</Modal>
+
+<script>
+  import { initModal } from "@/utils/modal";
+  import { isProductModalOpen } from "@/stores/storeModal";
+
+  initModal("product-modal", isProductModalOpen);
+</script>

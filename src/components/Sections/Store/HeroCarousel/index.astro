@@ -1,10 +1,15 @@
 ---
 import { StoreHeroCarousel } from "./StoreHeroCarousel";
-import { storeHeroSlides } from "@/data/Store/heroSlides";
+import { sanityFetch } from "@/sanity/client";
+import { STORE_HERO_SLIDES_QUERY, type StoreHeroSlide } from "@/sanity/schemas/Store/data";
+
+const slides = (await sanityFetch<StoreHeroSlide[]>(STORE_HERO_SLIDES_QUERY)) ?? [];
 ---
 
-<section class="lg:pt-20">
-  <div class="section-container">
-    <StoreHeroCarousel client:load slides={storeHeroSlides} />
-  </div>
-</section>
+{
+  slides.length > 0 && (
+    <section>
+      <StoreHeroCarousel client:load slides={slides} />
+    </section>
+  )
+}

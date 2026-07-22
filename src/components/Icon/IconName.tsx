@@ -37,7 +37,7 @@ import {
   IconHeartFilled,
   IconChessRookFilled,
 } from "@tabler/icons-react";
-import { IconCompassCustom, IconInstituteCustom } from "./CustomIcons";
+import { IconCompassCustom, IconInstituteCustom, IconWhatsappCustom } from "./CustomIcons";
 
 export const iconMap = {
   menu: IconMenu2,
@@ -52,6 +52,7 @@ export const iconMap = {
   "chevron-right": IconChevronRight,
   compass: IconCompassCustom,
   institute: IconInstituteCustom,
+  whatsapp: IconWhatsappCustom,
   book: IconBookFilled,
   briefcase: IconBriefcaseFilled,
   quote: IconQuoteFilled,

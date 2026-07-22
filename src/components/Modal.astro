@@ -1,0 +1,62 @@
+---
+import { Icon } from "@/components/Icon";
+import { cn } from "@/utils/className";
+
+interface Props {
+  id: string;
+  cardClass?: string;
+}
+
+const { id, cardClass } = Astro.props;
+---
+
+<div
+  id={id}
+  class="fixed inset-0 z-100 hidden items-end justify-center opacity-0 transition-opacity duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:items-center lg:p-4"
+  aria-hidden="true"
+>
+  <div id={`${id}-backdrop`} class="absolute inset-0 bg-black/80"></div>
+
+  <div
+    id={`${id}-card`}
+    class={cn(
+      "modal-card is-closed relative flex h-[90dvh] w-full flex-col transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:h-[75dvh] lg:w-1/2",
+      cardClass
+    )}
+  >
+    <div
+      class="flex h-full w-full flex-col overflow-hidden rounded-t-2xl bg-tertiary lg:rounded-3xl"
+    >
+      <div id={`${id}-handle`} class="flex shrink-0 touch-none justify-center py-3 lg:hidden">
+        <div class="h-1 w-16 rounded-full bg-white/25"></div>
+      </div>
+
+      <div id={`${id}-scroll`} class="scrollbar-mini min-h-0 flex-1 overflow-y-auto p-4 sm:p-8">
+        <slot />
+      </div>
+
+      <slot name="footer" />
+    </div>
+
+    <button
+      id={`${id}-close-outside`}
+      type="button"
+      aria-label="Fechar"
+      class="absolute -right-14 top-0 z-10 hidden size-9 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 lg:flex"
+    >
+      <Icon name="close" size={20} />
+    </button>
+  </div>
+</div>
+
+<style>
+  .modal-card.is-closed {
+    transform: scale(0.85);
+  }
+
+  @media (max-width: 1023px) {
+    .modal-card.is-closed {
+      transform: translateY(100%);
+    }
+  }
+</style>

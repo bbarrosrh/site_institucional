@@ -1,22 +1,57 @@
 ---
-import type { Product } from "@/data/Store/products";
+import type { Product } from "@/sanity/schemas/Store/data";
+import { cn } from "@/utils/className";
 
 interface Props {
   product: Product;
+  imageAspectClass?: string;
 }
 
-const { product } = Astro.props;
+const { product, imageAspectClass = "aspect-[3/2] lg:aspect-4/3" } = Astro.props;
+const formattedPrice = product.price.toLocaleString("pt-BR", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+const DESCRIPTION_LIMIT = 200;
+const flatDescription = product.description.replace(/\s+/g, " ").trim();
+const truncatedDescription =
+  flatDescription.length > DESCRIPTION_LIMIT
+    ? `${flatDescription.slice(0, DESCRIPTION_LIMIT).trim()}…`
+    : flatDescription;
 ---
 
-<div class="flex flex-col overflow-hidden rounded-2xl bg-black">
-  <div class="h-64 w-full bg-white"></div>
+<div
+  class={cn(
+    "product-card-trigger group relative flex h-full flex-col overflow-hidden rounded-2xl bg-black text-left",
+    !product.soldOut && "cursor-pointer"
+  )}
+  data-product={JSON.stringify(product)}
+  role={product.soldOut ? undefined : "button"}
+  tabindex={product.soldOut ? undefined : 0}
+>
+  <div class={cn("relative w-full bg-white", imageAspectClass, product.soldOut && "opacity-60")}>
+    <img src={product.coverImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  </div>
 
-  <div class="flex flex-1 flex-col gap-3 p-6 bg-tertiary">
-    <h3 class="font-heading text-xl font-semibold text-white">{product.name}</h3>
-    <p class="text-sm leading-relaxed text-white/70">{product.description}</p>
+  <div
+    class={cn("flex flex-1 flex-col gap-3 p-3 bg-tertiary lg:p-6", product.soldOut && "opacity-60")}
+  >
+    <h3 class="font-heading text-base font-semibold text-white lg:text-xl">{product.title}</h3>
+    <p class="max-lg:hidden text-sm leading-relaxed text-white/70">{truncatedDescription}</p>
 
     <div class="mt-auto pt-3">
-      <p class="font-heading text-2xl font-bold text-white">R$ {product.price}</p>
+      <p class="font-heading text-lg font-bold text-white lg:text-2xl">R$ {formattedPrice}</p>
     </div>
   </div>
+
+  {
+    product.soldOut && (
+      <span class="absolute top-3 right-3 rounded-full bg-black/80 px-3 py-1 text-xs font-semibold text-white">
+        Esgotado
+      </span>
+    )
+  }
+
+  {!product.soldOut && <div class="pointer-events-none absolute inset-0 group-hover:bg-black/15" />}
 </div>
